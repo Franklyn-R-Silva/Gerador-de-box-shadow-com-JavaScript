@@ -11,8 +11,11 @@ class ShadowController {
     this.view = view;
 
     // Initial Render
-    this.view.updateInputs(this.model.getState());
-    this.view.updatePreview(this.model.getCSS(), this.model.getDart(), this.model.getState().inset);
+    {
+        const state = this.model.getState();
+        this.view.updateInputs(state);
+        this.view.updatePreview(this.model.getCSS(), this.model.getDart(), state.inset, state.borderRadius, state.padding);
+    }
 
     // Bind events
     this.view.bindEvents(this.handleEvent.bind(this));
@@ -21,8 +24,9 @@ class ShadowController {
   handleEvent(type, value) {
     if (type === 'reset') {
       this.model.reset();
-      this.view.updateInputs(this.model.getState());
-      this.view.updatePreview(this.model.getCSS(), this.model.getDart(), this.model.getState().inset);
+      const state = this.model.getState();
+      this.view.updateInputs(state);
+      this.view.updatePreview(this.model.getCSS(), this.model.getDart(), state.inset, state.borderRadius, state.padding);
       return;
     }
 
@@ -37,7 +41,7 @@ class ShadowController {
         value = value / 100;
     }
     
-    if (['horizontal', 'vertical', 'blur', 'spread'].includes(type)) {
+    if (['horizontal', 'vertical', 'blur', 'spread', 'borderRadius', 'padding'].includes(type)) {
         const intVal = parseInt(value);
         if (!isNaN(intVal)) {
             value = intVal;
@@ -46,8 +50,9 @@ class ShadowController {
 
     this.model.update(type, value);
     
-    this.view.updateInputs(this.model.getState()); 
-    this.view.updatePreview(this.model.getCSS(), this.model.getDart(), this.model.getState().inset);
+    const state = this.model.getState();
+    this.view.updateInputs(state); 
+    this.view.updatePreview(this.model.getCSS(), this.model.getDart(), state.inset, state.borderRadius, state.padding);
   }
 
   copyToClipboard(mode) {
@@ -57,7 +62,15 @@ class ShadowController {
         textToCopy = this.model.getDart();
     } else {
         // Default to CSS
-        textToCopy = `box-shadow: ${this.model.getCSS()};\n-webkit-box-shadow: ${this.model.getCSS()};\n-moz-box-shadow: ${this.model.getCSS()};`;
+        // If border radius is > 0, we can include it.
+        const state = this.model.getState();
+        const shadowRule = this.model.getCSS();
+        
+        textToCopy = `box-shadow: ${shadowRule};\n-webkit-box-shadow: ${shadowRule};\n-moz-box-shadow: ${shadowRule};`;
+        
+        if (state.borderRadius > 0) {
+            textToCopy += `\nborder-radius: ${state.borderRadius}px;`;
+        }
     }
     
     navigator.clipboard.writeText(textToCopy)

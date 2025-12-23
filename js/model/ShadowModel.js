@@ -12,6 +12,8 @@ export class ShadowModel {
         color: "#000000",
         opacity: 1, // Stored as 0-1
         inset: false,
+        borderRadius: 0,
+        padding: 0,
       };
       
       this.defaultState = { ...this.state };
@@ -54,7 +56,7 @@ export class ShadowModel {
      * Generates Flutter BoxShadow code
      */
     getDart() {
-        const { horizontal, vertical, blur, spread, color, opacity, inset } = this.state;
+        const { horizontal, vertical, blur, spread, color, opacity, inset, borderRadius } = this.state;
         
         // Convert hex to rgb components
         const r = parseInt(color.slice(1, 3), 16);
@@ -62,21 +64,32 @@ export class ShadowModel {
         const b = parseInt(color.slice(5, 7), 16);
         
         let code = '';
-        
+
+        if (borderRadius > 0) {
+            code += `// Container decoration\n`;
+            code += `decoration: BoxDecoration(\n`;
+            code += `  borderRadius: BorderRadius.circular(${borderRadius}),\n`;
+            code += `  boxShadow: [\n    `;
+        }
+
         if (inset) {
-           code += "// Requires package: flutter_inset_box_shadow\n";
+           if (borderRadius === 0) code += "// Requires: flutter_inset_box_shadow\n";
            code += "BoxShadow(\n";
-           code += "  inset: true,\n";
+           code += "      inset: true,\n";
         } else {
            code += "BoxShadow(\n";
         }
         
-        code += `  color: Color.fromRGBO(${r}, ${g}, ${b}, ${opacity}),\n`;
-        code += `  offset: Offset(${horizontal}, ${vertical}),\n`;
-        code += `  blurRadius: ${blur},\n`;
-        code += `  spreadRadius: ${spread},\n`;
-        code += ")";
+        code += `      color: Color.fromRGBO(${r}, ${g}, ${b}, ${opacity}),\n`;
+        code += `      offset: Offset(${horizontal}, ${vertical}),\n`;
+        code += `      blurRadius: ${blur},\n`;
+        code += `      spreadRadius: ${spread},\n`;
+        code += "    )";
         
+        if (borderRadius > 0) {
+            code += `\n  ],\n)`;
+        }
+
         return code;
     }
 

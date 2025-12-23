@@ -203,6 +203,54 @@
           </div>
         </div>
         <!-- ----------------------------------------------------------- -->
+
+        <!-- Shape & Size Controls -->
+        <h2 style="font-size: 1.2rem; margin: 1.5rem 0 1rem; color: #64748b;">Forma & Tamanho</h2>
+        
+        <div class="form-control">
+          <div class="range-input">
+            <label for="borderRadius">Arredondamento (Radius):</label>
+            <input
+              type="range"
+              id="borderRadius"
+              name="borderRadius"
+              min="0"
+              max="50"
+              value="0"
+            />
+          </div>
+          <div class="reference-input">
+            <input
+              type="text"
+              id="borderRadius-value"
+              name="borderRadius-value"
+              aria-label="Valor do arredondamento"
+            />
+          </div>
+        </div>
+
+        <div class="form-control">
+            <div class="range-input">
+              <label for="padding">Tamanho (Padding):</label>
+              <input
+                type="range"
+                id="padding"
+                name="padding"
+                min="0"
+                max="100"
+                value="0"
+              />
+            </div>
+            <div class="reference-input">
+              <input
+                type="text"
+                id="padding-value"
+                name="padding-value"
+                aria-label="Valor do padding"
+              />
+            </div>
+          </div>
+        <!-- ----------------------------------------------------------- -->
         <div class="form-control button-control">
           <button
             type="button"
@@ -234,6 +282,7 @@
             <p id="rule">box-shadow: <span></span>;</p>
             <p id="webkit-rule">-webkit-box-shadow: <span></span>;</p>
             <p id="moz-rule">-moz-box-shadow: <span></span>;</p>
+            <p id="border-radius-rule" style="display:none;">border-radius: <span></span>;</p>
           </div>
           
           <!-- Dart Tab Content -->

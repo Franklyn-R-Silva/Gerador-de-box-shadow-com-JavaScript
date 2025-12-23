@@ -17,12 +17,18 @@ export class ShadowView {
       this.opacity = document.querySelector("#opacidade");
       this.opacityRef = document.querySelector("#opacidade-value");
       this.inset = document.querySelector("#insetBox");
+      this.borderRadius = document.querySelector("#borderRadius");
+      this.borderRadiusRef = document.querySelector("#borderRadius-value");
+      this.padding = document.querySelector("#padding");
+      this.paddingRef = document.querySelector("#padding-value");
   
       // Outputs
       this.previewBox = document.querySelector("#box");
       this.rule = document.querySelector("#rule span");
       this.webkitRule = document.querySelector("#webkit-rule span");
       this.mozRule = document.querySelector("#moz-rule span");
+      this.borderRadiusRule = document.querySelector("#border-radius-rule");
+      this.borderRadiusRuleSpan = document.querySelector("#border-radius-rule span");
       this.dartRule = document.querySelector("#dart-rule span");
       this.dartInstallInfo = document.querySelector("#dart-install-info");
 
@@ -59,6 +65,8 @@ export class ShadowView {
       bindDualInput(this.blur, "blur");
       bindDualInput(this.spread, "spread");
       bindDualInput(this.opacity, "opacity");
+      bindDualInput(this.borderRadius, "borderRadius");
+      bindDualInput(this.padding, "padding");
       
       // Other inputs
       bindDualInput(this.color, "color");
@@ -69,17 +77,30 @@ export class ShadowView {
       this.verticalRef.addEventListener("input", (e) => handler("vertical", e.target.value));
       this.blurRef.addEventListener("input", (e) => handler("blur", e.target.value));
       this.spreadRef.addEventListener("input", (e) => handler("spread", e.target.value));
+      this.borderRadiusRef.addEventListener("input", (e) => handler("borderRadius", e.target.value));
+      this.paddingRef.addEventListener("input", (e) => handler("padding", e.target.value));
       
       // Buttons
       this.resetBtn.addEventListener("click", () => handler("reset"));
       this.copyBtn.addEventListener("click", () => handler("copy", this.activeTab)); // Pass active tab
     }
   
-    updatePreview(cssString, dartString, isInset) {
+    updatePreview(cssString, dartString, isInset, borderRadius, padding) {
       this.previewBox.style.boxShadow = cssString;
+      this.previewBox.style.borderRadius = `${borderRadius}px`;
+      this.previewBox.style.padding = `${padding}px`;
+
       this.rule.innerText = cssString;
       this.webkitRule.innerText = cssString;
       this.mozRule.innerText = cssString;
+      
+      if (borderRadius > 0) {
+          this.borderRadiusRule.style.display = 'block';
+          this.borderRadiusRuleSpan.innerText = `${borderRadius}px`;
+      } else {
+          this.borderRadiusRule.style.display = 'none';
+      }
+
       this.dartRule.innerText = dartString;
       
       this.isInset = isInset;
@@ -114,6 +135,12 @@ export class ShadowView {
       this.opacity.value = state.opacity * 100;
       this.opacityRef.value = state.opacity;
       
+      this.borderRadius.value = state.borderRadius;
+      this.borderRadiusRef.value = state.borderRadius;
+
+      this.padding.value = state.padding;
+      this.paddingRef.value = state.padding;
+
       this.inset.checked = state.inset;
     }
   
