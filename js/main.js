@@ -14,7 +14,7 @@ class ShadowController {
     {
         const state = this.model.getState();
         this.view.updateInputs(state);
-        this.view.updatePreview(this.model.getCSS(), this.model.getDart(), state.inset, state.borderRadius, state.padding);
+        this.view.updatePreview(this.model.getCSS(), this.model.getDart(), state.inset, state.borderRadius);
     }
 
     // Bind events
@@ -26,7 +26,7 @@ class ShadowController {
       this.model.reset();
       const state = this.model.getState();
       this.view.updateInputs(state);
-      this.view.updatePreview(this.model.getCSS(), this.model.getDart(), state.inset, state.borderRadius, state.padding);
+      this.view.updatePreview(this.model.getCSS(), this.model.getDart(), state.inset, state.borderRadius);
       return;
     }
 
@@ -41,7 +41,7 @@ class ShadowController {
         value = value / 100;
     }
     
-    if (['horizontal', 'vertical', 'blur', 'spread', 'borderRadius', 'padding'].includes(type)) {
+    if (['horizontal', 'vertical', 'blur', 'spread', 'borderRadius'].includes(type)) { // Padding removed
         const intVal = parseInt(value);
         if (!isNaN(intVal)) {
             value = intVal;
@@ -52,7 +52,7 @@ class ShadowController {
     
     const state = this.model.getState();
     this.view.updateInputs(state); 
-    this.view.updatePreview(this.model.getCSS(), this.model.getDart(), state.inset, state.borderRadius, state.padding);
+    this.view.updatePreview(this.model.getCSS(), this.model.getDart(), state.inset, state.borderRadius);
   }
 
   copyToClipboard(mode) {

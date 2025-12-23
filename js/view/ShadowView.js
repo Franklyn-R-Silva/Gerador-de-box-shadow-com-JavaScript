@@ -1,9 +1,18 @@
 import { TabManager } from '../components/TabManager.js';
 import { NotificationManager } from '../components/NotificationManager.js';
+import { ControlFactory } from '../components/ControlFactory.js';
+import { shadowControls } from '../config/controlsConfig.js';
 
 export class ShadowView {
     constructor() {
-      // Inputs
+      // Containers
+      this.shadowContainer = document.querySelector("#shadow-controls-container");
+      this.shapeContainer = document.querySelector("#shape-controls-container");
+      
+      // Initialize dynamic controls
+      this.initDynamicControls();
+
+      // Bind dynamic elements
       this.horizontal = document.querySelector("#horizontal");
       this.horizontalRef = document.querySelector("#horizontal-value");
       this.vertical = document.querySelector("#vertical");
@@ -19,8 +28,6 @@ export class ShadowView {
       this.inset = document.querySelector("#insetBox");
       this.borderRadius = document.querySelector("#borderRadius");
       this.borderRadiusRef = document.querySelector("#borderRadius-value");
-      this.padding = document.querySelector("#padding");
-      this.paddingRef = document.querySelector("#padding-value");
   
       // Outputs
       this.previewBox = document.querySelector("#box");
@@ -46,7 +53,23 @@ export class ShadowView {
       this.isInset = false;
     }
 
-    // Called by TabManager
+    initDynamicControls() {
+        shadowControls.forEach(config => {
+            let control;
+            if (config.type === 'checkbox') {
+                control = ControlFactory.createCheckboxControl(config);
+            } else {
+                control = ControlFactory.createRangeControl(config);
+            }
+
+            if (config.category === 'shadow') {
+                this.shadowContainer.appendChild(control);
+            } else {
+                this.shapeContainer.appendChild(control);
+            }
+        });
+    }
+
     onTabChanged(newTab) {
         this.activeTab = newTab;
         this.notificationManager.updateCopyButtonText(newTab);
@@ -54,41 +77,30 @@ export class ShadowView {
     }
   
     bindEvents(handler) {
-      // helper to bind input + change for range sliders
       const bindDualInput = (elem, type) => {
+        if (!elem) return;
         elem.addEventListener("input", (e) => handler(type, e.target.value));
       };
   
-      // Ranges
-      bindDualInput(this.horizontal, "horizontal");
-      bindDualInput(this.vertical, "vertical");
-      bindDualInput(this.blur, "blur");
-      bindDualInput(this.spread, "spread");
-      bindDualInput(this.opacity, "opacity");
-      bindDualInput(this.borderRadius, "borderRadius");
-      bindDualInput(this.padding, "padding");
+      shadowControls.forEach(config => {
+          if (config.type !== 'checkbox') {
+              const slider = document.getElementById(config.id);
+              const textInput = document.getElementById(`${config.id}-value`);
+              bindDualInput(slider, config.id);
+              bindDualInput(textInput, config.id);
+          } else {
+              const check = document.getElementById(config.id);
+              check.addEventListener("change", (e) => handler(config.id, e.target.checked));
+          }
+      });
       
-      // Other inputs
-      bindDualInput(this.color, "color");
-      this.inset.addEventListener("change", (e) => handler("inset", e.target.checked));
-  
-      // Reference inputs (Manual typing)
-      this.horizontalRef.addEventListener("input", (e) => handler("horizontal", e.target.value));
-      this.verticalRef.addEventListener("input", (e) => handler("vertical", e.target.value));
-      this.blurRef.addEventListener("input", (e) => handler("blur", e.target.value));
-      this.spreadRef.addEventListener("input", (e) => handler("spread", e.target.value));
-      this.borderRadiusRef.addEventListener("input", (e) => handler("borderRadius", e.target.value));
-      this.paddingRef.addEventListener("input", (e) => handler("padding", e.target.value));
-      
-      // Buttons
       this.resetBtn.addEventListener("click", () => handler("reset"));
-      this.copyBtn.addEventListener("click", () => handler("copy", this.activeTab)); // Pass active tab
+      this.copyBtn.addEventListener("click", () => handler("copy", this.activeTab));
     }
   
-    updatePreview(cssString, dartString, isInset, borderRadius, padding) {
+    updatePreview(cssString, dartString, isInset, borderRadius) {
       this.previewBox.style.boxShadow = cssString;
       this.previewBox.style.borderRadius = `${borderRadius}px`;
-      this.previewBox.style.padding = `${padding}px`;
 
       this.rule.innerText = cssString;
       this.webkitRule.innerText = cssString;
@@ -102,7 +114,6 @@ export class ShadowView {
       }
 
       this.dartRule.innerText = dartString;
-      
       this.isInset = isInset;
       this.checkInstallInfo();
     }
@@ -116,32 +127,20 @@ export class ShadowView {
     }
   
     updateInputs(state) {
-      this.horizontal.value = state.horizontal;
-      this.horizontalRef.value = state.horizontal;
-      
-      this.vertical.value = state.vertical;
-      this.verticalRef.value = state.vertical;
-      
-      this.blur.value = state.blur;
-      this.blurRef.value = state.blur;
-      
-      this.spread.value = state.spread;
-      this.spreadRef.value = state.spread;
-      
-      this.color.value = state.color;
-      this.colorRef.value = state.color;
-      
-      // Opacity is 0-1 state, 0-100 input
-      this.opacity.value = state.opacity * 100;
-      this.opacityRef.value = state.opacity;
-      
-      this.borderRadius.value = state.borderRadius;
-      this.borderRadiusRef.value = state.borderRadius;
+        shadowControls.forEach(config => {
+            const slider = document.getElementById(config.id);
+            const textInput = document.getElementById(`${config.id}-value`);
 
-      this.padding.value = state.padding;
-      this.paddingRef.value = state.padding;
-
-      this.inset.checked = state.inset;
+            if (config.type === 'checkbox') {
+                slider.checked = state[config.id];
+            } else if (config.id === 'opacity') { // Fixed ID from previous step
+                slider.value = state.opacity * 100;
+                textInput.value = state.opacity;
+            } else {
+                slider.value = state[config.id];
+                if (textInput) textInput.value = state[config.id];
+            }
+        });
     }
   
     showCopyFeedback() {

@@ -13,7 +13,6 @@ export class ShadowModel {
         opacity: 1, // Stored as 0-1
         inset: false,
         borderRadius: 0,
-        padding: 0,
       };
       
       this.defaultState = { ...this.state };

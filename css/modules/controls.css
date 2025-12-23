@@ -14,6 +14,18 @@
   color: var(--text-main);
 }
 
+.reference-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.reference-input p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
 /* Range Sliders with Gradient Tracks */
 .range-input {
   display: flex;
