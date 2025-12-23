@@ -54,6 +54,8 @@
     line-height: 1.6;
     color: #cbd5e1;
     margin: 0;
+    word-break: break-all; /* Forces wrapping for long strings like Tailwind classes */
+    white-space: pre-wrap; /* Preserves formatting but allows wrapping */
 }
 
 #rules-area p { margin-bottom: var(--spacing-2); }

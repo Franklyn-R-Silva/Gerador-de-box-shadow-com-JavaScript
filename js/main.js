@@ -112,15 +112,32 @@ class ShadowController {
           this.model.update('backgroundColor', '#e0e0e0');
           this.model.update('canvasColor', '#e0e0e0');
       } else if (presetName === 'cristal') {
-          // Glassmorphism simulation (simplified)
+          // Glassmorphism simulation (High Quality)
+          this.model.reset(); 
+
+          // Layer 1: Soft backdrop shadow (Glow)
+          this.model.update('horizontal', 0);
+          this.model.update('vertical', 8);
+          this.model.update('blur', 32);
+          this.model.update('spread', 0);
+          this.model.update('color', '#1f2687'); // Deep blue ambient shadow
+          this.model.update('opacity', 0.37);
+          
+          this.model.addLayer();
+          
+          // Layer 2: White rim light / border (Inset)
+          // Simulates the light catching the glass edge
+          this.model.update('horizontal', 0);
+          this.model.update('vertical', 0);
+          this.model.update('blur', 0);
+          this.model.update('spread', 1); // 1px border
           this.model.update('color', '#ffffff');
-          this.model.update('opacity', 0.4);
-          this.model.update('blur', 8);
-          this.model.update('spread', 2);
-          this.model.update('backgroundColor', 'rgba(255, 255, 255, 0.25)'); 
-          this.model.update('canvasColor', '#4158d0'); // Nice blue gradient fallback color
-          // Ideally glass needs backdrop-filter, but that's a CSS property of the box itself, 
-          // currently we only generate box-shadow. 
+          this.model.update('opacity', 0.18);
+          this.model.update('inset', true);
+
+          // Box and Canvas
+          this.model.update('backgroundColor', 'rgba(255, 255, 255, 0.15)'); // Semi-transparent white
+          this.model.update('canvasColor', '#0891b2'); // Nice cyan gradient base for glass to pop
       }
 
       this.refreshView();
