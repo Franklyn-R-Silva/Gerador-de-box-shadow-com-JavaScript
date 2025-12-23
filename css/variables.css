@@ -1,20 +1,46 @@
 :root {
-  /* Colors */
-  --primary-color: #005cc8;
-  --primary-hover: #003d82;
-  --secondary-color: #e9d60a;
-  --text-color: #333;
-  --label-color: #555;
-  --bg-color: #f4f4f4;
-  --panel-bg: white;
-  --border-color: #ccc;
-  --input-bg: #d3d3d3;
+  /* Premium Glassmorphism Palette */
+  
+  /* Primary Accents (Neon/Vibrant) */
+  --primary-color: #4f46e5;      /* Indigo 600 - Base Action */
+  --primary-hover: #4338ca;      /* Indigo 700 */
+  --accent-color: #f472b6;       /* Pink 400 - Highlights */
+  --accent-glow: 0 0 20px rgba(244, 114, 182, 0.5);
+
+  /* Backgrounds */
+  --bg-gradient-1: #4f46e5;
+  --bg-gradient-2: #ec4899;
+  --bg-gradient-3: #06b6d4;
+  
+  /* Text */
+  --text-main: #1e293b;         /* Slate 800 */
+  --text-muted: #64748b;        /* Slate 500 */
+  --text-light: #ffffff;
+  
+  /* Glass Effect Tokens */
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-bg-hover: rgba(255, 255, 255, 0.85);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --glass-blur: blur(12px);
+  
+  /* Input/Control Colors */
+  --input-bg: rgba(255, 255, 255, 0.6);
+  --input-border: 1px solid rgba(255, 255, 255, 0.8);
+  
+  /* Layout */
+  --max-width: 1200px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
   
   /* Spacing */
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 2rem;
-  
-  /* Borders */
-  --border-radius: 5px;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2.5rem;
+
+  /* Typography */
+  --font-family: 'Inter', sans-serif;
 }

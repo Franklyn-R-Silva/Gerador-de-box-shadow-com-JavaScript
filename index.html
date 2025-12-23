@@ -27,6 +27,11 @@
       content="https://gerador-de-box-shadow.netlify.app/"
     />
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
@@ -35,7 +40,19 @@
   </head>
 
   <body>
-    <div id="box-shadow-generator">
+    <!-- Background Animation -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="main-wrapper glass-panel">
+      <header>
+          <h1>Gerador de Box Shadow</h1>
+          <p>Crie sombras CSS perfeitas em segundos.</p>
+      </header>
+      <div id="box-shadow-generator">
       <div id="controls-container">
         <h2>Configurações da Box Shadow:</h2>
         <div class="form-control">
