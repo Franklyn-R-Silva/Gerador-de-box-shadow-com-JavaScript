@@ -118,8 +118,8 @@ header p {
 #controls-container, 
 #preview {
   background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
   border: var(--glass-border);
   box-shadow: var(--glass-shadow);
   border-radius: var(--radius-lg);
@@ -243,6 +243,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 /* Color & Checkbox */
 input[type="color"] {
   -webkit-appearance: none;
+  appearance: none;
   width: 65px; /* Increased size */
   height: 65px; /* Increased size */
   border: none;
@@ -341,6 +342,35 @@ input[type="checkbox"] {
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+#dart-install-info {
+    display: none; /* Initial state from external CSS */
+    margin-top: 15px;
+    padding: 12px;
+    background: rgba(99, 102, 241, 0.15);
+    border-left: 4px solid #818cf8;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    animation: fadeIn 0.3s ease;
+}
+
+#dart-install-info p {
+    margin: 0 0 8px 0 !important; /* Force override */
+    color: #e2e8f0 !important;
+    font-weight: 600;
+}
+
+#dart-install-info code {
+    display: block;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px 12px;
+    border-radius: 4px;
+    color: #a5b4fc;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    -webkit-user-select: text; /* Safari compatibility */
+    user-select: all;
 }
 
 /* Action Buttons */

@@ -12,7 +12,7 @@ class ShadowController {
 
     // Initial Render
     this.view.updateInputs(this.model.getState());
-    this.view.updatePreview(this.model.getCSS(), this.model.getDart());
+    this.view.updatePreview(this.model.getCSS(), this.model.getDart(), this.model.getState().inset);
 
     // Bind events
     this.view.bindEvents(this.handleEvent.bind(this));
@@ -22,7 +22,7 @@ class ShadowController {
     if (type === 'reset') {
       this.model.reset();
       this.view.updateInputs(this.model.getState());
-      this.view.updatePreview(this.model.getCSS(), this.model.getDart());
+      this.view.updatePreview(this.model.getCSS(), this.model.getDart(), this.model.getState().inset);
       return;
     }
 
@@ -47,7 +47,7 @@ class ShadowController {
     this.model.update(type, value);
     
     this.view.updateInputs(this.model.getState()); 
-    this.view.updatePreview(this.model.getCSS(), this.model.getDart());
+    this.view.updatePreview(this.model.getCSS(), this.model.getDart(), this.model.getState().inset);
   }
 
   copyToClipboard(mode) {

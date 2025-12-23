@@ -25,11 +25,13 @@ export class ShadowView {
       this.webkitRule = document.querySelector("#webkit-rule span");
       this.mozRule = document.querySelector("#moz-rule span");
       this.dartRule = document.querySelector("#dart-rule span");
+      this.dartInstallInfo = document.querySelector("#dart-install-info");
 
       // Tabs
       this.tabBtns = document.querySelectorAll(".tab-btn");
       this.tabContents = document.querySelectorAll(".tab-content");
       this.activeTab = "css"; // default
+      this.isInset = false;
   
       // Buttons
       this.copyBtn = document.querySelector("#copiarTexto");
@@ -58,6 +60,8 @@ export class ShadowView {
                 // Update button text to reflect what will be copied
                 const label = target === 'css' ? 'CSS' : 'Dart';
                 this.copyText.textContent = `Clique aqui para copiar as regras (${label})`;
+                
+                this.checkInstallInfo();
             });
         });
     }
@@ -90,12 +94,23 @@ export class ShadowView {
       this.copyBtn.addEventListener("click", () => handler("copy", this.activeTab)); // Pass active tab
     }
   
-    updatePreview(cssString, dartString) {
+    updatePreview(cssString, dartString, isInset) {
       this.previewBox.style.boxShadow = cssString;
       this.rule.innerText = cssString;
       this.webkitRule.innerText = cssString;
       this.mozRule.innerText = cssString;
       this.dartRule.innerText = dartString;
+      
+      this.isInset = isInset;
+      this.checkInstallInfo();
+    }
+
+    checkInstallInfo() {
+        if (this.activeTab === 'dart' && this.isInset) {
+            this.dartInstallInfo.style.display = 'block';
+        } else {
+            this.dartInstallInfo.style.display = 'none';
+        }
     }
   
     updateInputs(state) {

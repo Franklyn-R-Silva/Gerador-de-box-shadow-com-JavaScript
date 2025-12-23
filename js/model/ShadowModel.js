@@ -61,23 +61,23 @@ export class ShadowModel {
         const g = parseInt(color.slice(3, 5), 16);
         const b = parseInt(color.slice(5, 7), 16);
         
-        // Flutter uses 0.0-1.0 for opacity, which matches our internal state `opacity`.
+        let code = '';
         
-        // BoxShadow(
-        //   color: Color.fromRGBO(0, 0, 0, 1),
-        //   offset: Offset(0, 0),
-        //   blurRadius: 10,
-        //   spreadRadius: 0,
-        // )
+        if (inset) {
+           code += "// Requires package: flutter_inset_box_shadow\n";
+           code += "BoxShadow(\n";
+           code += "  inset: true,\n";
+        } else {
+           code += "BoxShadow(\n";
+        }
         
-        const insetComment = inset ? ' // inset not supported in BoxShadow' : '';
+        code += `  color: Color.fromRGBO(${r}, ${g}, ${b}, ${opacity}),\n`;
+        code += `  offset: Offset(${horizontal}, ${vertical}),\n`;
+        code += `  blurRadius: ${blur},\n`;
+        code += `  spreadRadius: ${spread},\n`;
+        code += ")";
         
-        return `BoxShadow(
-      color: Color.fromRGBO(${r}, ${g}, ${b}, ${opacity}),
-      offset: Offset(${horizontal}, ${vertical}),
-      blurRadius: ${blur},
-      spreadRadius: ${spread},
-    )${insetComment}`;
+        return code;
     }
 
     /**
