@@ -1,18 +1,21 @@
 /* Base Styles and Reset */
-
 * {
   font-family: var(--font-family);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   min-height: 100vh;
   color: var(--text-main);
-  background: #f0f2f5; /* Fallback */
+  background: #f1f5f9; /* Neutral Slate 100 */
   overflow-x: hidden;
   position: relative;
+  line-height: var(--line-height-base);
+  font-size: var(--font-body);
 }
 
 /* Specific width for Hex Color text to fit #RRGGBB */

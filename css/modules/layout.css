@@ -2,68 +2,103 @@
 
 .main-wrapper {
   max-width: var(--max-width);
-  margin: 2rem auto;
-  padding: var(--spacing-lg);
+  margin: var(--spacing-8) auto;
+  padding: var(--spacing-6);
   position: relative;
   z-index: 1;
 }
 
 header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: var(--spacing-10);
 }
 
 header h1 {
   font-weight: 800;
-  font-size: 3rem;
-  letter-spacing: -1px;
-  color: #1e293b;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.05);
-  margin-bottom: 0.5rem;
+  font-size: var(--font-h1);
+  letter-spacing: -2px;
+  color: var(--text-main);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: var(--spacing-2);
+  line-height: var(--line-height-heading);
+}
+
+header h1 span {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 header p {
-  color: var(--text-muted);
-  font-size: 1.2rem;
+  color: var(--text-main);
+  font-size: 1.1rem;
   font-weight: 500;
+  opacity: 0.9;
+}
+
+/* Helpers for inline style removal */
+.section-title-secondary {
+    font-size: 1.2rem;
+    margin: 1.5rem 0 1rem;
+    color: var(--text-muted);
+}
+
+.hidden-rule {
+    display: none;
 }
 
 /* Grid Layout */
 #box-shadow-generator {
   display: grid;
-  grid-template-columns: 1.2fr 1fr; /* More space for controls */
-  gap: 2rem;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--spacing-8);
   align-items: start;
 }
 
 @media (max-width: 900px) {
   #box-shadow-generator {
     grid-template-columns: 1fr;
+    gap: var(--spacing-6);
+  }
+  
+  .main-wrapper {
+    padding: var(--spacing-4);
+    margin: var(--spacing-4) auto;
   }
 }
 
 /* Preview Box */
 #preview {
     position: sticky;
-    top: 2rem;
+    top: var(--spacing-4);
     display: flex;
     flex-direction: column;
+    min-height: 480px; /* Ensure consistency */
+    justify-content: center;
+    padding: var(--spacing-8); /* Added padding for breathing room */
 }
 
 #box {
-    width: 100%;
-    height: 300px;
-    background: #ffd700;
+    width: 200px;
+    height: 200px;
+    background: #ffd700; /* Restored Yellow Default */
     border-radius: var(--radius-md);
-    margin-bottom: 2rem;
-    /* transition: box-shadow 0.1s; // Remove transition for instant responsiveness */
+    margin: 0 auto;
     align-self: center;
+    /* transition: box-shadow 0.1s; // Instant update preferred */
 }
 
-/* Responsive */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .blob { opacity: 0.4; } /* Reduce distraction on small screens */
-    header h1 { font-size: 2rem; }
+    .blob { opacity: 0.4; } 
+    header h1 { font-size: 2.5rem; }
     
-    .reference-input p { display: none; } /* Save space */
+    .reference-input p { display: none; }
+    
+    #box {
+      width: 150px; 
+      height: 150px;
+    }
 }

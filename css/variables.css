@@ -13,34 +13,50 @@
   --bg-gradient-3: #06b6d4;
   
   /* Text */
-  --text-main: #1e293b;         /* Slate 800 */
-  --text-muted: #64748b;        /* Slate 500 */
+  --text-main: #0f172a;         /* Slate 900 - Darker for better contrast */
+  --text-muted: #475569;        /* Slate 600 - Darker for readability */
   --text-light: #ffffff;
   
   /* Glass Effect Tokens */
-  --glass-bg: rgba(255, 255, 255, 0.75);
-  --glass-bg-hover: rgba(255, 255, 255, 0.85);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.5);
+  --glass-bg: rgba(255, 255, 255, 0.85); /* Increased opacity for better text contrast background */
+  --glass-bg-hover: rgba(255, 255, 255, 0.95);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.6);
   --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-  --glass-blur: blur(12px);
+  --glass-blur: blur(16px); /* Stronger blur */
   
   /* Input/Control Colors */
-  --input-bg: rgba(255, 255, 255, 0.6);
-  --input-border: 1px solid rgba(255, 255, 255, 0.8);
+  --input-bg: rgba(255, 255, 255, 0.5);
+  --input-border: 1px solid rgba(255, 255, 255, 0.6);
+  --input-focus-border: var(--primary-color);
+  --input-focus-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
   
   /* Layout */
   --max-width: 1200px;
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
+  --radius-xl: 32px;
   --radius-full: 9999px;
   
-  /* Spacing */
-  --spacing-xs: 0.5rem;
-  --spacing-sm: 1rem;
-  --spacing-md: 1.5rem;
-  --spacing-lg: 2.5rem;
+  /* Spacing Scale (4px base) */
+  --spacing-1: 0.25rem;  /* 4px */
+  --spacing-2: 0.5rem;   /* 8px */
+  --spacing-3: 0.75rem;  /* 12px */
+  --spacing-4: 1rem;     /* 16px */
+  --spacing-5: 1.25rem;  /* 20px */
+  --spacing-6: 1.5rem;   /* 24px */
+  --spacing-8: 2rem;     /* 32px */
+  --spacing-10: 2.5rem;  /* 40px */
+  --spacing-12: 3rem;    /* 48px */
+  --spacing-16: 4rem;    /* 64px */
 
   /* Typography */
   --font-family: 'Inter', sans-serif;
+  --font-h1: 3rem;
+  --font-h2: 1.5rem;
+  --font-body: 1rem;
+  --font-small: 0.875rem;
+  
+  --line-height-base: 1.5;
+  --line-height-heading: 1.1;
 }

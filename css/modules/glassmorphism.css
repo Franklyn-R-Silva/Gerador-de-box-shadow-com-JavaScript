@@ -9,13 +9,14 @@
   backdrop-filter: var(--glass-blur);
   border: var(--glass-border);
   box-shadow: var(--glass-shadow);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-6);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #controls-container:hover, 
 #preview:hover {
-  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.2);
-  transform: translateY(-2px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.6);
 }

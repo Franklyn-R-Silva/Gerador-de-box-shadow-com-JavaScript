@@ -1,63 +1,94 @@
 /* Controls and Range Sliders */
 
 .form-control {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-6);
   border: none;
   padding: 0;
 }
 
-.form-control label {
-  display: block;
+.control-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-3);
+}
+
+.control-header label {
   font-weight: 600;
   font-size: 0.95rem;
-  margin-bottom: 0.8rem;
   color: var(--text-main);
+  margin: 0;
 }
 
 .reference-input {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--spacing-2);
 }
 
-.reference-input p {
+.reference-input .unit {
     color: var(--text-muted);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
+    user-select: none;
 }
 
-/* Range Sliders with Gradient Tracks */
-.range-input {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+.control-body {
+    width: 100%;
 }
 
+/* Range Sliders */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 8px;
-  background: rgba(0,0,0,0.05); /* Track */
+  height: 8px; /* Slightly thicker */
+  background: rgba(0, 0, 0, 0.15); /* Darker track for visibility on light/glass bg */
   border-radius: var(--radius-full);
   outline: none;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  margin: 10px 0;
+  margin: 0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: background 0.3s;
+}
+
+input[type="range"]:hover {
+    background: rgba(0, 0, 0, 0.25);
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   background: white;
-  background-image: linear-gradient(135deg, white, #f8fafc);
   cursor: pointer;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2), 0 0 0 2px var(--primary-color);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.05);
   transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid var(--primary-color);
+  margin-top: -6px; /* Center alignment fix depending on browser, or use flex centering */
+}
+/* No margin needed if height matches? Range height 6px, thumb 18px. Thumb is taller. */
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: var(--radius-full);
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1.2);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+/* Checkbox specific */
+.checkbox-control {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--spacing-2) 0;
+}
+
+.checkbox-control label {
+    margin-right: auto;
+    font-weight: 600;
 }
