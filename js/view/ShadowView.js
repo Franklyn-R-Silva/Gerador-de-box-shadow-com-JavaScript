@@ -1,7 +1,6 @@
-/**
- * ShadowView.js
- * Responsible for DOM manipulation and Event binding.
- */
+import { TabManager } from '../components/TabManager.js';
+import { NotificationManager } from '../components/NotificationManager.js';
+
 export class ShadowView {
     constructor() {
       // Inputs
@@ -27,43 +26,25 @@ export class ShadowView {
       this.dartRule = document.querySelector("#dart-rule span");
       this.dartInstallInfo = document.querySelector("#dart-install-info");
 
-      // Tabs
-      this.tabBtns = document.querySelectorAll(".tab-btn");
-      this.tabContents = document.querySelectorAll(".tab-content");
-      this.activeTab = "css"; // default
-      this.isInset = false;
-  
       // Buttons
       this.copyBtn = document.querySelector("#copiarTexto");
       this.copyText = document.querySelector("#texto");
       this.resetBtn = document.querySelector("#resetButton");
-
-      // Initialize Tabs
-      this.initTabs();
+      
+      // Managers
+      this.notificationManager = new NotificationManager(this.copyText, this.copyBtn);
+      this.tabManager = new TabManager(this);
+      
+      // State
+      this.activeTab = "css"; 
+      this.isInset = false;
     }
 
-    initTabs() {
-        this.tabBtns.forEach(btn => {
-            btn.addEventListener("click", () => {
-                // Remove active from all
-                this.tabBtns.forEach(b => b.classList.remove("active"));
-                this.tabContents.forEach(c => c.classList.remove("active"));
-
-                // Add active to clicked
-                btn.classList.add("active");
-                const target = btn.dataset.tab;
-                document.getElementById(`${target}-content`).classList.add("active");
-                
-                // Update state
-                this.activeTab = target;
-                
-                // Update button text to reflect what will be copied
-                const label = target === 'css' ? 'CSS' : 'Dart';
-                this.copyText.textContent = `Clique aqui para copiar as regras (${label})`;
-                
-                this.checkInstallInfo();
-            });
-        });
+    // Called by TabManager
+    onTabChanged(newTab) {
+        this.activeTab = newTab;
+        this.notificationManager.updateCopyButtonText(newTab);
+        this.checkInstallInfo();
     }
   
     bindEvents(handler) {
@@ -137,14 +118,6 @@ export class ShadowView {
     }
   
     showCopyFeedback() {
-      // const originalText = this.copyText.textContent; // Not used currently
-      this.copyText.textContent = "Copiado com sucesso!";
-      this.copyBtn.classList.add("copied");
-      
-      setTimeout(() => {
-        const label = this.activeTab === 'css' ? 'CSS' : 'Dart';
-        this.copyText.textContent = `Clique aqui para copiar as regras (${label})`;
-        this.copyBtn.classList.remove("copied");
-      }, 2000);
+        this.notificationManager.showCopyFeedback(this.activeTab);
     }
 }

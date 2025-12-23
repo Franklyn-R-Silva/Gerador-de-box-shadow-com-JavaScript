@@ -1,0 +1,22 @@
+/* Base Styles and Reset */
+
+* {
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--text-main);
+  background: #f0f2f5; /* Fallback */
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Specific width for Hex Color text to fit #RRGGBB */
+.reference-input input[id="color-value"] {
+    width: 100px;
+    text-transform: uppercase;
+}

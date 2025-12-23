@@ -1,0 +1,52 @@
+/* Buttons */
+
+.reset-btn {
+    margin-top: 1.5rem;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: var(--radius-full);
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.reset-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+}
+
+.copiarTexto {
+    background: linear-gradient(135deg, var(--primary-color), var(--bg-gradient-2));
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    height: 55px;
+    border-radius: var(--radius-full);
+    margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+    transition: all 0.3s ease;
+    width: 100%;
+    cursor: pointer;
+}
+
+.copiarTexto:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4); /* Pink glow on hover */
+}
+
+.copiarTexto:active { transform: scale(0.98); }
+
+.copiarTexto.copied {
+    background: #10b981;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}

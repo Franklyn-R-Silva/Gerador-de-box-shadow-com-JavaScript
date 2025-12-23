@@ -1,0 +1,50 @@
+/* Inputs, Color Pickers, and Checkboxes */
+
+/* Inputs */
+.reference-input input[type="text"] {
+  width: 60px;
+  height: 36px;
+  background: var(--input-bg);
+  border: var(--input-border);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.reference-input input[type="text"]:focus {
+  outline: none;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+  border-color: var(--primary-color);
+}
+
+/* Color & Checkbox */
+input[type="color"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 65px; /* Increased size */
+  height: 65px; /* Increased size */
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+input[type="color"]:hover {
+    transform: scale(1.05); /* Subtle scale */
+}
+input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+input[type="color"]::-webkit-color-swatch { 
+    border: 3px solid white; /* Thicker border */
+    border-radius: var(--radius-md); 
+}
+
+input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  accent-color: var(--primary-color);
+  margin-left: 10px;
+}

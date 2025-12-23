@@ -1,0 +1,21 @@
+/* Glassmorphism Configuration & Utilities */
+
+/* Glass Panels */
+#controls-container, 
+#preview,
+.glass-panel {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#controls-container:hover, 
+#preview:hover {
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.2);
+  transform: translateY(-2px);
+}
