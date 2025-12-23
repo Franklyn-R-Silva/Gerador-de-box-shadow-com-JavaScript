@@ -1,0 +1,137 @@
+/* Gradient Controls Styles (Compact) */
+
+#gradient-manager-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.gradient-controls-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gradient-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 5px;
+}
+
+.toggle-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 18px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(14px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Color Inputs */
+.color-mode-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.color-mode-section.hidden {
+    display: none;
+}
+
+.gradient-inputs {
+    display: flex;
+    gap: 5px;
+}
+
+.color-input-wrapper {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.color-picker-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+}
+
+.color-picker-label span {
+    font-size: 0; /* Hide text but keep for accessibility/structure */
+}
+
+/* Tooltip on hover logic could be added here if needed */
+
+.angle-control {
+    display: flex;
+    flex-direction: column;
+    width: 60px;
+}
+
+.angle-control label {
+    font-size: 0.7rem;
+    white-space: nowrap;
+    color: var(--text-muted);
+}
+
+.angle-control input[type="range"] {
+    height: 4px;
+}

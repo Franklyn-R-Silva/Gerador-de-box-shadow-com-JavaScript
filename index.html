@@ -26,51 +26,92 @@
         <h1>Gerador de <span>Box Shadow</span></h1>
         <p>Crie sombras modernas e exporte para CSS ou Flutter</p>
       </header>
-      
+
+      <div id="toolbar" class="glass-panel">
+        <div class="toolbar-section">
+          <span class="toolbar-label">Templates:</span>
+          <div class="presets-bar">
+            <button class="preset-btn" data-preset="soft">Soft</button>
+            <button class="preset-btn" data-preset="neumorphism">
+              Neumorph
+            </button>
+            <button class="preset-btn" data-preset="cristal">Glass</button>
+          </div>
+        </div>
+
+        <div class="toolbar-separator"></div>
+
+        <div class="toolbar-section">
+          <span class="toolbar-label">Fundo & Objeto:</span>
+          <div class="color-config">
+            <label title="Cor do Fundo (Canvas)" for="bg-color-picker"
+              ><input type="color" id="bg-color-picker" value="#ffffff" title="Seletor de cor do fundo"
+            /></label>
+            <div id="gradient-manager-container"></div>
+          </div>
+        </div>
+      </div>
+
       <div id="box-shadow-generator">
         <div id="controls">
-          <h2>Configurações da Sombra:</h2>
-          <div id="layer-controls-container"></div>
-          <div id="shadow-controls-container"></div>
+          <div class="sidebar-tabs">
+            <button class="sidebar-tab active" data-sidebar="shadow">
+              Sombra
+            </button>
+            <button class="sidebar-tab" data-sidebar="background">Fundo</button>
+          </div>
 
-          <h2 class="section-title-secondary">Forma & Tamanho</h2>
-          <div id="shape-controls-container"></div>
+          <!-- SHADOW TAB -->
+          <div id="sidebar-content-shadow" class="sidebar-content active">
+            <h2>Configurações da Sombra:</h2>
+            <div id="layer-controls-container"></div>
+            <div id="shadow-controls-container"></div>
+
+            <h2 class="section-title-secondary">Forma & Tamanho</h2>
+            <div id="shape-controls-container"></div>
+          </div>
+
+          <!-- BACKGROUND TAB -->
+          <div id="sidebar-content-background" class="sidebar-content">
+            <h2>Camadas de Fundo:</h2>
+            <div id="background-layers-container"></div>
+
+            <div id="bg-controls-wrapper">
+              <!-- Dynamic content for current bg layer -->
+            </div>
+
+            <div class="color-mode-section">
+              <label for="base-bg-picker">Cor Base (Sólida):</label>
+              <input
+                type="color"
+                id="base-bg-picker"
+                value="#ffdd00"
+                title="Cor Base Sólida"
+              />
+            </div>
+          </div>
 
           <div class="form-control button-control">
             <button type="button" id="resetButton" class="reset-btn">
-              ↺ Resetar Valores
+              ↺ Resetar Tudo
             </button>
           </div>
         </div>
 
         <div id="preview">
           <h2>Preview do efeito:</h2>
-          
-          <div class="preview-controls">
-            <div class="presets-bar">
-               <!-- Presets generated via JS or hardcoded -->
-               <button class="preset-btn" data-preset="soft">Soft</button>
-               <button class="preset-btn" data-preset="neumorphism">Neumorph</button>
-               <button class="preset-btn" data-preset="cristal">Glass</button>
-            </div>
-            <div class="color-config">
-               <label title="Cor do Fundo"><input type="color" id="bg-color-picker" value="#f3f4f6"></label>
-               <label title="Cor do Objeto"><input type="color" id="obj-color-picker" value="#ffffff"></label>
-            </div>
-          </div>
-
           <div id="box"></div>
         </div>
       </div>
 
       <footer id="generated-rule">
         <h2>Copie o código gerado:</h2>
-        
+
         <div class="tabs-container">
           <div class="tabs-header">
-             <button class="tab-btn active" data-tab="css">CSS</button>
-             <button class="tab-btn" data-tab="dart">Dart</button>
-             <button class="tab-btn" data-tab="tailwind">Tailwind</button>
+            <button class="tab-btn active" data-tab="css">CSS</button>
+            <button class="tab-btn" data-tab="dart">Dart</button>
+            <button class="tab-btn" data-tab="tailwind">Tailwind</button>
           </div>
 
           <div id="rules-area">
@@ -78,9 +119,11 @@
               <p id="rule">box-shadow: <span></span>;</p>
               <p id="webkit-rule">-webkit-box-shadow: <span></span>;</p>
               <p id="moz-rule">-moz-box-shadow: <span></span>;</p>
-              <p id="border-radius-rule" class="hidden-rule">border-radius: <span></span>;</p>
+              <p id="border-radius-rule" class="hidden-rule">
+                border-radius: <span></span>;
+              </p>
             </div>
-            
+
             <div id="dart-content" class="tab-content">
               <pre id="dart-rule"><span></span></pre>
               <div id="dart-install-info">
@@ -88,13 +131,13 @@
                 <code>flutter pub add flutter_inset_box_shadow</code>
               </div>
             </div>
-            
+
             <div id="tailwind-content" class="tab-content">
-               <p id="tailwind-rule">class="<span></span>"</p>
+              <p id="tailwind-rule">class="<span></span>"</p>
             </div>
           </div>
         </div>
-        
+
         <button class="copiarTexto" id="copiarTexto">
           <span id="texto">Clique aqui para copiar as regras (CSS)</span>
         </button>

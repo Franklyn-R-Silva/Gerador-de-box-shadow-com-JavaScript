@@ -10,11 +10,37 @@ class ShadowController {
     this.model = model;
     this.view = view;
 
-    // Initialize Layer Manager
+    // Initialize Layer Manager (Shadows)
     this.view.initLayerManager({
         onSelect: (index) => this.handleLayerSelect(index),
         onAdd: () => this.handleLayerAdd(),
         onRemove: (index) => this.handleLayerRemove(index)
+    });
+
+    // Initialize Background Manager (Gradients)
+    this.view.initBackgroundManager({
+        onAdd: () => {
+            this.model.addBackgroundLayer();
+            this.refreshView();
+        },
+        onRemove: (index) => {
+            this.model.removeBackgroundLayer(index);
+            this.refreshView();
+        },
+        onSelect: (index) => {
+            this.model.selectBackgroundLayer(index);
+            this.refreshView();
+        },
+        onUpdate: (key, value) => {
+            // updates global bg params like 'backgroundColor'
+            this.model.update(key, value);
+            this.refreshView();
+        },
+        onUpdateLayer: (key, value) => {
+            // updates specific active layer param
+            this.model.update(key, value);
+            this.refreshView();
+        }
     });
 
     // Initial Render
@@ -32,7 +58,6 @@ class ShadowController {
     }
 
     if (type === 'copy') {
-      // Value passed from View is the 'activeTab' name string ('css' or 'dart' or 'tailwind')
       this.copyToClipboard(value);
       return;
     }
@@ -80,29 +105,26 @@ class ShadowController {
   }
 
   applyPreset(presetName) {
-      // Quick hardcoded presets for now
-      // ideally this could be in a config file
       this.model.reset();
       
       if (presetName === 'soft') {
           this.model.update('blur', 10);
           this.model.update('opacity', 0.15);
           this.model.update('vertical', 4);
-          this.model.update('horizontal', 0);
-          this.model.update('spread', 0);
           this.model.update('canvasColor', '#f3f4f6');
           this.model.update('backgroundColor', '#ffffff');
+          // Clear background layers
+          this.model.backgroundLayers = [];
       } else if (presetName === 'neumorphism') {
-          this.model.reset(); // clear layers
-          // Layer 1 - light
+          this.model.reset(); 
+          // Layer 1
           this.model.update('horizontal', -5);
           this.model.update('vertical', -5);
           this.model.update('blur', 10);
           this.model.update('color', '#ffffff');
           this.model.update('opacity', 1);
-          
           this.model.addLayer();
-          // Layer 2 - dark
+          // Layer 2
           this.model.update('horizontal', 5);
           this.model.update('vertical', 5);
           this.model.update('blur', 10);
@@ -111,33 +133,28 @@ class ShadowController {
           
           this.model.update('backgroundColor', '#e0e0e0');
           this.model.update('canvasColor', '#e0e0e0');
+          this.model.backgroundLayers = [];
       } else if (presetName === 'cristal') {
-          // Glassmorphism simulation (High Quality)
           this.model.reset(); 
-
-          // Layer 1: Soft backdrop shadow (Glow)
+          // Layer 1
           this.model.update('horizontal', 0);
           this.model.update('vertical', 8);
           this.model.update('blur', 32);
-          this.model.update('spread', 0);
-          this.model.update('color', '#1f2687'); // Deep blue ambient shadow
+          this.model.update('color', '#1f2687');
           this.model.update('opacity', 0.37);
-          
           this.model.addLayer();
-          
-          // Layer 2: White rim light / border (Inset)
-          // Simulates the light catching the glass edge
+          // Layer 2
           this.model.update('horizontal', 0);
           this.model.update('vertical', 0);
           this.model.update('blur', 0);
-          this.model.update('spread', 1); // 1px border
+          this.model.update('spread', 1);
           this.model.update('color', '#ffffff');
           this.model.update('opacity', 0.18);
           this.model.update('inset', true);
 
-          // Box and Canvas
-          this.model.update('backgroundColor', 'rgba(255, 255, 255, 0.15)'); // Semi-transparent white
-          this.model.update('canvasColor', '#0891b2'); // Nice cyan gradient base for glass to pop
+          this.model.update('backgroundColor', 'rgba(255, 255, 255, 0.15)'); 
+          this.model.update('canvasColor', '#0891b2');
+          this.model.backgroundLayers = [];
       }
 
       this.refreshView();
@@ -148,14 +165,17 @@ class ShadowController {
     const css = this.model.getCSS();
     const dart = this.model.getDart();
     const tailwind = this.model.getTailwind();
+    const bgCSS = this.model.getBackgroundCSS();
 
     this.view.updateInputs(state);
-    this.view.updatePreview(css, dart, tailwind, state);
+    this.view.updatePreview(css, dart, tailwind, state, bgCSS);
   }
 
   copyToClipboard(mode) {
     let textToCopy = "";
     const state = this.model.getState();
+    const shadowRule = this.model.getCSS();
+    const bgCSS = this.model.getBackgroundCSS();
     
     if (mode === 'dart') {
         textToCopy = this.model.getDart();
@@ -163,12 +183,11 @@ class ShadowController {
         textToCopy = this.model.getTailwind();
     } else {
         // CSS
-        const shadowRule = this.model.getCSS();
-        
-        textToCopy = `box-shadow: ${shadowRule};\n-webkit-box-shadow: ${shadowRule};\n-moz-box-shadow: ${shadowRule};`;
+        textToCopy = `box-shadow: ${shadowRule};\n`;
+        textToCopy += `background: ${bgCSS};\n`; // Now includes gradient/solid
         
         if (state.borderRadius > 0) {
-            textToCopy += `\nborder-radius: ${state.borderRadius}px;`;
+            textToCopy += `border-radius: ${state.borderRadius}px;`;
         }
     }
     
@@ -182,7 +201,6 @@ class ShadowController {
   }
 }
 
-// Initialize App
 document.addEventListener('DOMContentLoaded', () => {
     const app = new ShadowController(new ShadowModel(), new ShadowView());
 });

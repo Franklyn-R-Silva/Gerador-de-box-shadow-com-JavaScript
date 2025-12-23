@@ -16,23 +16,59 @@ export class ShadowModel {
         inset: false,
       };
 
-      // We'll separate box properties from shadow properties
+      // Window/Box properties
       this.boxProperties = {
         borderRadius: 0,
-        backgroundColor: "#ffdd00", // Default Yellow
-        canvasColor: "#ffffff"      // Preview background color
+        backgroundColor: "#ffdd00", // Default base color (bottom layer)
+        canvasColor: "#ffffff",     // Preview workspace background
       };
+
+      // Background Layers (Stacked on top of solid base color)
+      // Type: 'linear' | 'radial'
+      this.backgroundLayers = [
+          // Example default: No extra layers, just base color.
+      ];
+      this.currentBgLayerIndex = -1; // -1 means editing base color, 0+ means layer
 
       this.layers = [ { ...this.defaultLayerState, opacity: 0.2 } ];
       this.currentLayerIndex = 0;
     }
   
     /**
+     * Returns the full state for View rendering
+     */
+    getState() {
+        const currentLayer = this.layers[this.currentLayerIndex] || this.defaultLayerState;
+        
+        return {
+            ...this.boxProperties,
+            ...currentLayer,
+            layerCount: this.layers.length,
+            currentLayerIndex: this.currentLayerIndex,
+            backgroundLayers: this.backgroundLayers,
+            currentBgLayerIndex: this.currentBgLayerIndex,
+            currentBgLayer: this.currentBgLayerIndex >= 0 ? this.backgroundLayers[this.currentBgLayerIndex] : null
+        };
+    }
+
+    /**
      * Updates the current layer or global box properties
      */
     update(key, value) {
-      if (['borderRadius'].includes(key)) {
+      if (['borderRadius', 'backgroundColor', 'canvasColor'].includes(key)) {
         this.boxProperties[key] = value;
+      } else if (key.startsWith('bgLayer')) {
+          // Handle Background Layer Updates
+          if (this.currentBgLayerIndex >= 0 && this.backgroundLayers[this.currentBgLayerIndex]) {
+             const layer = this.backgroundLayers[this.currentBgLayerIndex];
+             const param = key.replace('bgLayer', '').toLowerCase(); // e.g. 'type', 'angle'
+             
+             if (param === 'stops') { // special case for stops array
+                 layer.stops = value;
+             } else {
+                 layer[param] = value; 
+             }
+          }
       } else {
         // Shadow specific property
         if (key === 'opacity') {
@@ -47,57 +83,52 @@ export class ShadowModel {
         }
       }
     }
-  
+
+    /* Background Layer Management */
+    addBackgroundLayer(type = 'linear') {
+        this.backgroundLayers.push({
+            type: type,
+            angle: 90, // for linear
+            shape: 'circle', // for radial
+            stops: [
+                { color: '#ffffff', position: 0 },
+                { color: '#000000', position: 100 }
+            ],
+            opacity: 1
+        });
+        this.currentBgLayerIndex = this.backgroundLayers.length - 1;
+    }
+
+    removeBackgroundLayer(index) {
+        this.backgroundLayers.splice(index, 1);
+        this.currentBgLayerIndex = this.backgroundLayers.length > 0 ? 0 : -1;
+    }
+
+    selectBackgroundLayer(index) {
+        this.currentBgLayerIndex = index;
+    }
+
     /**
-     * Returns the state of the CURRENT active layer + global box properties
-     * This ensures the View inputs show the correct values for the selected layer.
+     * Helper to get the background CSS value (Layers + Base Color)
      */
-    getState() {
-      const currentLayer = this.layers[this.currentLayerIndex] || this.defaultLayerState;
-      return { 
-          ...currentLayer,
-          ...this.boxProperties,
-          // Add helpful metadata for the view
-          layerCount: this.layers.length,
-          currentLayerIndex: this.currentLayerIndex
-      };
-    }
-    
-    getAllLayers() {
-        return this.layers;
-    }
-
-    addLayer() {
-        // Clone default state
-        this.layers.push({ ...this.defaultLayerState });
-        this.currentLayerIndex = this.layers.length - 1;
-    }
-
-    removeLayer(index) {
-        // If index not provided, remove current
-        const idxToRemove = index !== undefined ? index : this.currentLayerIndex;
-        
-        if (this.layers.length > 1) {
-            this.layers.splice(idxToRemove, 1);
-            // Adjust index if out of bounds
-            if (this.currentLayerIndex >= this.layers.length) {
-                this.currentLayerIndex = this.layers.length - 1;
+    getBackgroundCSS() {
+        const layersCSS = this.backgroundLayers.map(layer => {
+            const stopsStr = layer.stops.map(s => `${s.color} ${s.position}%`).join(', ');
+            
+            if (layer.type === 'radial') {
+                return `radial-gradient(${layer.shape}, ${stopsStr})`;
             }
+            // Linear
+            return `linear-gradient(${layer.angle}deg, ${stopsStr})`;
+        });
+
+        // Add base color at the end
+        if (layersCSS.length > 0) {
+            return `${layersCSS.join(', ')}, ${this.boxProperties.backgroundColor}`;
         }
+        return this.boxProperties.backgroundColor;
     }
 
-    selectLayer(index) {
-        if (index >= 0 && index < this.layers.length) {
-            this.currentLayerIndex = index;
-        }
-    }
-  
-    reset() {
-      this.layers = [ { ...this.defaultLayerState, opacity: 0.2 } ];
-      this.currentLayerIndex = 0;
-      this.boxProperties.borderRadius = 0;
-    }
-  
     /**
      * Generates the CSS-compatible shadow string for ALL layers
      */
@@ -118,10 +149,28 @@ export class ShadowModel {
         const { borderRadius } = this.boxProperties;
         let code = '';
 
-        if (borderRadius > 0) {
+        if (borderRadius > 0 || this.boxProperties.useGradient) {
             code += `// Container decoration\n`;
             code += `decoration: BoxDecoration(\n`;
-            code += `  borderRadius: BorderRadius.circular(${borderRadius}),\n`;
+            if (borderRadius > 0) code += `  borderRadius: BorderRadius.circular(${borderRadius}),\n`;
+            
+            if (this.boxProperties.useGradient) {
+                 const start = this.hexToColorObj(this.boxProperties.gradientStart);
+                 const end = this.hexToColorObj(this.boxProperties.gradientEnd);
+                 // Convert degrees to Alignment vaguely
+                 code += `  gradient: LinearGradient(\n`;
+                 code += `    begin: Alignment.topLeft,\n`; 
+                 code += `    end: Alignment.bottomRight,\n`;
+                 code += `    colors: [\n`;
+                 code += `      Color(0xFF${start.hex}),\n`;
+                 code += `      Color(0xFF${end.hex}),\n`;
+                 code += `    ],\n`;
+                 code += `  ),\n`;
+            } else {
+                 const bg = this.hexToColorObj(this.boxProperties.backgroundColor);
+                 code += `  color: Color(0xFF${bg.hex}),\n`;
+            }
+
             code += `  boxShadow: [\n`;
         } else {
             code += `boxShadow: [\n`;
@@ -193,5 +242,13 @@ export class ShadowModel {
       const b = parseInt(result[3], 16);
   
       return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    hexToColorObj(hex) {
+        let c = hex.substring(1);
+        if(c.length === 3) {
+            c = c.split('').map(char => char + char).join('');
+        }
+        return { hex: c.toUpperCase() };
     }
   }

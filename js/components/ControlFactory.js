@@ -26,8 +26,9 @@ export class ControlFactory {
                     type="${type}"
                     id="${id}"
                     name="${id}"
+                    title="${label}"
                     ${type !== 'color' ? `min="${min}" max="${max}" step="${step}"` : ''}
-                    value="${value || '#000000'}"
+                    value="${value !== undefined && value !== null ? value : '#000000'}"
                 />
             </div>
         `;
@@ -48,6 +49,7 @@ export class ControlFactory {
                 id="${id}"
                 name="${id}"
                 class="checkmark"
+                title="${label}"
                 ${checked ? 'checked' : ''}
             />
         `;

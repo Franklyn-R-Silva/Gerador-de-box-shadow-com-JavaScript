@@ -77,13 +77,23 @@ header p {
     flex-direction: column;
     min-height: 520px; 
     padding: var(--spacing-8);
-    justify-content: flex-start; /* Align content to top */
+    justify-content: center; /* Center content vertically now */
+    align-items: center;     /* Center content horizontally */
+    background: var(--glass-bg); /* Ensure it has glass background */
+    border-radius: var(--radius-lg);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
 }
 
 #preview h2 {
-    margin-bottom: var(--spacing-8); /* Add significant space after title */
-    align-self: flex-start; /* Ensure title stays at top left */
+    margin-bottom: var(--spacing-8); 
+    align-self: flex-start; 
     width: 100%;
+    position: absolute; /* Float title */
+    top: var(--spacing-8);
+    left: var(--spacing-8);
 }
 
 #box {

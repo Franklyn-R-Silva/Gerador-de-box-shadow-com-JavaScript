@@ -2,6 +2,7 @@ import { TabManager } from '../components/TabManager.js';
 import { NotificationManager } from '../components/NotificationManager.js';
 import { ControlFactory } from '../components/ControlFactory.js';
 import { LayerManager } from '../components/LayerManager.js';
+import { BackgroundManager } from '../components/BackgroundManager.js'; // New
 import { shadowControls } from '../config/controlsConfig.js';
 
 export class ShadowView {
@@ -11,8 +12,14 @@ export class ShadowView {
       this.shapeContainer = document.querySelector("#shape-controls-container");
       this.layerContainer = document.querySelector("#layer-controls-container");
       
+      // New Background Containers
+      this.bgLayersContainer = document.querySelector("#background-layers-container");
+      this.bgControlsWrapper = document.querySelector("#bg-controls-wrapper");
+
       // Initialize dynamic controls
       this.initDynamicControls();
+      
+      this.initSidebarTabs(); // Initialize sidebar tabs logic
 
       // Bind dynamic elements
       this.horizontal = document.querySelector("#horizontal");
@@ -23,8 +30,7 @@ export class ShadowView {
       this.blurRef = document.querySelector("#blur-value");
       this.spread = document.querySelector("#spread");
       this.spreadRef = document.querySelector("#spread-value");
-      this.color = document.querySelector("#cores");
-      this.colorRef = document.querySelector("#color-value");
+      // this.color ... (handled by manager usually but kept for sync)
       this.opacity = document.querySelector("#opacidade");
       this.opacityRef = document.querySelector("#opacidade-value");
       this.inset = document.querySelector("#insetBox");
@@ -44,9 +50,8 @@ export class ShadowView {
       this.tailwindRule = document.querySelector("#tailwind-rule span");
 
       // Customization Inputs
-      this.bgColorPicker = document.querySelector("#bg-color-picker");
-      this.objColorPicker = document.querySelector("#obj-color-picker");
-
+      this.bgColorPicker = document.querySelector("#bg-color-picker"); // Canvas bg
+      
       // Buttons
       this.copyBtn = document.querySelector("#copiarTexto");
       this.copyText = document.querySelector("#texto");
@@ -60,6 +65,24 @@ export class ShadowView {
       // State
       this.activeTab = "css"; 
       this.isInset = false;
+    }
+
+    initSidebarTabs() {
+        const tabs = document.querySelectorAll('.sidebar-tab');
+        const contents = document.querySelectorAll('.sidebar-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+                
+                // Add active
+                tab.classList.add('active');
+                const target = document.getElementById(`sidebar-content-${tab.dataset.sidebar}`);
+                if(target) target.classList.add('active');
+            });
+        });
     }
 
     initDynamicControls() {
@@ -81,6 +104,11 @@ export class ShadowView {
 
     initLayerManager(callbacks) {
         this.layerManager = new LayerManager(this.layerContainer, callbacks);
+    }
+
+    // New Background Manager
+    initBackgroundManager(callbacks) {
+        this.backgroundManager = new BackgroundManager(this.bgLayersContainer, this.bgControlsWrapper, callbacks);
     }
 
     onTabChanged(newTab) {
@@ -115,23 +143,19 @@ export class ShadowView {
           btn.addEventListener("click", () => handler("preset", btn.dataset.preset));
       });
 
-      // Color Customization
-      this.bgColorPicker.addEventListener("input", (e) => handler("canvasColor", e.target.value));
-      this.objColorPicker.addEventListener("input", (e) => handler("backgroundColor", e.target.value));
+      // Canvas Background Color
+      if (this.bgColorPicker) {
+         this.bgColorPicker.addEventListener("input", (e) => handler("canvasColor", e.target.value));
+      }
     }
   
-    updatePreview(cssString, dartString, tailwindString, state) {
+    updatePreview(cssString, dartString, tailwindString, state, backgroundCSS) {
       this.previewBox.style.boxShadow = cssString;
       this.previewBox.style.borderRadius = `${state.borderRadius}px`;
-      this.previewBox.style.backgroundColor = state.backgroundColor;
       
-      // Update canvas background if previewWrapper has a specific area, 
-      // but actually user asked to change the preview area background.
-      // We can apply it to the parent of #box which is #preview.
-      // #preview has h2 etc, maybe we just want the area around the box.
-      // But let's apply to #preview for now.
-      // Better: Apply to #preview or create a wrapper. 
-      // The CSS structure has #preview { ... }. 
+      // Apply background (Solid or Gradient Layers)
+      this.previewBox.style.background = backgroundCSS;
+      
       this.previewWrapper.style.backgroundColor = state.canvasColor;
 
       this.rule.innerText = cssString;
@@ -150,9 +174,12 @@ export class ShadowView {
       this.isInset = state.inset;
       this.checkInstallInfo();
 
-      // Update Layer Manager UI
+      // Update Managers
       if (this.layerManager) {
           this.layerManager.update(state.layerCount, state.currentLayerIndex);
+      }
+      if (this.backgroundManager) {
+          this.backgroundManager.update(state);
       }
     }
 
@@ -165,22 +192,20 @@ export class ShadowView {
     }
   
     updateInputs(state) {
-        // Update customization pickers
-        this.bgColorPicker.value = state.canvasColor;
-        this.objColorPicker.value = state.backgroundColor;
+        // Canvas Picker
+        if (this.bgColorPicker) this.bgColorPicker.value = state.canvasColor;
 
         shadowControls.forEach(config => {
             const slider = document.getElementById(config.id);
             const textInput = document.getElementById(`${config.id}-value`);
+            if(!slider) return;
 
             if (config.type === 'checkbox') {
                 slider.checked = state[config.id];
             } else if (config.id === 'opacity') {
                 slider.value = state.opacity * 100;
-                textInput.value = state.opacity;
+                if(textInput) textInput.value = state.opacity;
             } else {
-                // If the property exists in state, update it.
-                // Some properties might be global (borderRadius) or layer specific
                 if (state[config.id] !== undefined) {
                     slider.value = state[config.id];
                     if (textInput) textInput.value = state[config.id];
