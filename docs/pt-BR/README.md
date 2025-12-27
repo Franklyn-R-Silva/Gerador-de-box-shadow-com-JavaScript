@@ -18,7 +18,13 @@ Uma ferramenta web moderna e interativa para gerar sombras CSS (`box-shadow`) e 
 
 [👉 Acesse a ferramenta online](https://layeredshade.netlify.app/)
 
+### Preview
+
 ![Preview](../../github/tela.png)
+
+### Demo Animado
+
+![Demo](../../github/demo.webp)
 
 ## ✨ Funcionalidades
 

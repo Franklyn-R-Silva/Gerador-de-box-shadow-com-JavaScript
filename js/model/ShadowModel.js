@@ -1,41 +1,116 @@
 /**
  * ShadowModel.js
  * Responsible for holding the state of the box shadow generator.
- * Now supports multiple layers.
+ * Implements the Model layer of the MVC pattern.
+ *
+ * @module ShadowModel
+ * @author Franklyn R. Silva
+ * @license MIT
+ */
+
+/**
+ * @typedef {Object} ShadowLayer
+ * @property {number} horizontal - X offset in pixels
+ * @property {number} vertical - Y offset in pixels
+ * @property {number} blur - Blur radius in pixels
+ * @property {number} spread - Spread radius in pixels
+ * @property {string} color - Hex color value
+ * @property {number} opacity - Opacity from 0 to 1
+ * @property {boolean} inset - Whether shadow is inset
+ */
+
+/**
+ * @typedef {Object} GradientStop
+ * @property {string} color - Hex color value
+ * @property {number} position - Position from 0 to 100
+ */
+
+/**
+ * @typedef {Object} BackgroundLayer
+ * @property {'linear'|'radial'} type - Gradient type
+ * @property {number} angle - Angle for linear gradients (degrees)
+ * @property {'circle'|'ellipse'} shape - Shape for radial gradients
+ * @property {GradientStop[]} stops - Color stops array
+ * @property {number} opacity - Layer opacity
+ */
+
+/**
+ * Model class for the box shadow generator.
+ * Manages shadow layers, background gradients, and box properties.
+ * Generates CSS, Dart/Flutter, and Tailwind output.
+ *
+ * @class ShadowModel
+ * @example
+ * const model = new ShadowModel();
+ * model.update('blur', 15);
+ * console.log(model.getCSS());
  */
 export class ShadowModel {
+  /**
+   * Creates a new ShadowModel instance with default values.
+   * Initializes one shadow layer and no background gradients.
+   */
   constructor() {
-    // Default template for a new layer
+    /**
+     * Default template for a new shadow layer
+     * @type {ShadowLayer}
+     */
     this.defaultLayerState = {
       horizontal: 5,
       vertical: 5,
       blur: 10,
       spread: 3,
       color: '#000000',
-      opacity: 0.5, // Default opacity for new layers
+      opacity: 0.5,
       inset: false,
     };
 
-    // Window/Box properties
+    /**
+     * Global box properties
+     * @type {Object}
+     */
     this.boxProperties = {
       borderRadius: 0,
-      backgroundColor: '#ffdd00', // Default base color (bottom layer)
-      canvasColor: '#ffffff', // Preview workspace background
+      backgroundColor: '#ffdd00',
+      canvasColor: '#ffffff',
     };
 
-    // Background Layers (Stacked on top of solid base color)
-    // Type: 'linear' | 'radial'
-    this.backgroundLayers = [
-      // Example default: No extra layers, just base color.
-    ];
-    this.currentBgLayerIndex = -1; // -1 means editing base color, 0+ means layer
+    /**
+     * Array of background gradient layers
+     * @type {BackgroundLayer[]}
+     */
+    this.backgroundLayers = [];
 
+    /**
+     * Index of currently selected background layer (-1 = base color)
+     * @type {number}
+     */
+    this.currentBgLayerIndex = -1;
+
+    /**
+     * Array of shadow layers
+     * @type {ShadowLayer[]}
+     */
     this.layers = [{ ...this.defaultLayerState, opacity: 0.2 }];
+
+    /**
+     * Index of currently selected shadow layer
+     * @type {number}
+     */
     this.currentLayerIndex = 0;
   }
 
   /**
-   * Returns the full state for View rendering
+   * Returns the full state for View rendering.
+   * Combines box properties with current layer properties.
+   *
+   * @returns {Object} Complete state object for the View
+   * @property {number} borderRadius - Border radius in pixels
+   * @property {string} backgroundColor - Base background color
+   * @property {number} horizontal - Current layer X offset
+   * @property {number} vertical - Current layer Y offset
+   * @property {number} layerCount - Total number of shadow layers
+   * @property {number} currentLayerIndex - Index of selected layer
    */
   getState() {
     const currentLayer = this.layers[this.currentLayerIndex] || this.defaultLayerState;
@@ -53,7 +128,15 @@ export class ShadowModel {
   }
 
   /**
-   * Updates the current layer or global box properties
+   * Updates a property on the current layer or global box properties.
+   * Automatically routes to the correct target based on key prefix.
+   *
+   * @param {string} key - Property name to update
+   * @param {*} value - New value for the property
+   * @example
+   * model.update('blur', 15);         // Shadow property
+   * model.update('borderRadius', 10); // Box property
+   * model.update('bgLayerAngle', 45); // Background layer property
    */
   update(key, value) {
     if (['borderRadius', 'backgroundColor', 'canvasColor'].includes(key)) {
@@ -87,10 +170,14 @@ export class ShadowModel {
     }
   }
 
+  /**
+   * Resets the model to default state.
+   * Clears all layers and restores default values.
+   */
   reset() {
     this.layers = [{ ...this.defaultLayerState, opacity: 0.5 }];
     this.currentLayerIndex = 0;
-    this.backgroundLayers = []; // Clear gradients
+    this.backgroundLayers = [];
     this.currentBgLayerIndex = -1;
     this.boxProperties = {
       borderRadius: 0,
@@ -99,14 +186,23 @@ export class ShadowModel {
     };
   }
 
-  /* Shadow Layer Management */
+  /**
+   * Adds a new shadow layer with default values.
+   * Automatically selects the new layer.
+   */
   addLayer() {
     this.layers.push({ ...this.defaultLayerState });
     this.currentLayerIndex = this.layers.length - 1;
   }
 
+  /**
+   * Removes a shadow layer by index.
+   * Maintains at least one layer.
+   *
+   * @param {number} index - Index of layer to remove
+   */
   removeLayer(index) {
-    if (this.layers.length <= 1) return; // Keep at least one layer
+    if (this.layers.length <= 1) return;
     this.layers.splice(index, 1);
     if (this.currentLayerIndex >= this.layers.length) {
       this.currentLayerIndex = this.layers.length - 1;

@@ -22,7 +22,13 @@ A modern and interactive web tool for generating CSS shadows (`box-shadow`) and 
 
 [👉 Try it online](https://layeredshade.netlify.app/)
 
+### Preview
+
 ![Preview](github/tela.png)
+
+### Demo Animation
+
+![Demo](github/demo.webp)
 
 ## ✨ Features
 
