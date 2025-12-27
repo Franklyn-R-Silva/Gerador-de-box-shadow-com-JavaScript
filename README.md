@@ -1,51 +1,111 @@
-# Gerador de Box Shadow (CSS & Flutter)
+# 🎨 Gerador de Box Shadow (CSS & Flutter)
 
 Uma ferramenta web moderna e interativa para gerar sombras CSS (`box-shadow`) e código Dart/Flutter (`BoxShadow`) visualmente.
 
+[![Demo](https://img.shields.io/badge/Demo-Live-brightgreen)](https://gerador-de-box-shadow.netlify.app/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+### 🛠️ Tecnologias Utilizadas
+
+<img src="https://go-skill-icons.vercel.app/api/icons?i=html,css,js&theme=dark&perline=3" alt="Skills: HTML, CSS, JavaScript"/>
+
+## 🚀 Demo
+
+**[👉 Acesse a ferramenta online](https://gerador-de-box-shadow.netlify.app/)**
+
 ![Preview](github/tela.png)
 
-## Funcionalidades
+## ✨ Funcionalidades
 
-- **Visualização em Tempo Real**: Veja a sombra sendo aplicada instantaneamente.
-- **Controle Completo**: Ajuste deslocamento X/Y, desfoque, propagação, cor e opacidade.
-- **Novidade: Forma e Tamanho**: Ajuste o `border-radius` (arredondamento) e o `padding` do elemento.
-- **CSS & Dart**: Gera código pronto para copiar tanto para Web (CSS) quanto para Flutter (Dart).
-- **Suporte a Inset**: Suporta sombras internas (`inset`).
-  - _Nota para Flutter_: Sugere automaticamente o pacote `flutter_inset_box_shadow` quando sombras internas são usadas.
-- **Design Premium**: Interface moderna estilo "Glassmorphism" com animações suaves e tema escuro/vibrante.
-- **Cópia Inteligente**: Botão de cópia sensível ao contexto (copia CSS ou Dart dependendo da aba ativa).
+### Sombras
 
-## Como Usar
+- **Visualização em Tempo Real**: Preview instantâneo das alterações
+- **Múltiplas Camadas**: Crie sombras complexas com várias camadas
+- **Controle Completo**: Ajuste X, Y, blur, spread, cor e opacidade
+- **Suporte a Inset**: Sombras internas com sugestão automática de pacote Flutter
 
-1. Abra o arquivo `index.html` em qualquer navegador moderno.
-2. Use os sliders para ajustar a sombra.
-3. Alterne entre as abas "CSS" e "Dart" para ver o código gerado.
-4. Clique no botão "Clique aqui para copiar as regras" para levar o código para sua área de transferência.
+### Fundo & Forma
 
-## Instalação (Desenvolvimento)
+- **Gradientes**: Linear e radial com múltiplos color stops
+- **Forma Personalizada**: Ajuste border-radius e padding
+- **Presets**: Templates prontos (Soft, Neumorphism, Glass)
 
-Este projeto usa JavaScript puro (ES Modules), HTML5 e CSS3 moderno. Não requer build steps complexos (Webpack/Vite), mas precisa ser servido via HTTP devido aos módulos ES.
+### Exportação
 
-### Requisitos
+- **CSS**: Código pronto com prefixos (-webkit, -moz)
+- **Dart/Flutter**: BoxShadow e BoxDecoration formatados
+- **Tailwind**: Classes utilitárias arbitrárias
+- **Cópia Inteligente**: Botão sensível ao contexto (CSS/Dart/Tailwind)
 
-- Qualquer servidor estático simples (ex: `Live Server` do VS Code, `http-server` do NPM, ou Python `http.server`).
+## 🛠️ Tecnologias
 
-### Rodando Localmente
+| Tecnologia     | Uso                                                  |
+| -------------- | ---------------------------------------------------- |
+| **HTML5**      | Estrutura semântica                                  |
+| **CSS3**       | Variables, Grid, Flexbox, Animations, Glassmorphism  |
+| **JavaScript** | ES6+, Modules, Classes (Vanilla - zero dependências) |
 
-1. Clone o repositório.
-2. Abra a pasta no VS Code.
-3. Use a extensão **Live Server** para abrir o `index.html`.
+## 📁 Arquitetura
 
-## Arquitetura
+O projeto segue o padrão **MVC (Model-View-Controller)**:
 
-O projeto segue o padrão **MVC (Model-View-Controller)**. Para detalhes técnicos, consulte [ARCHITECTURE.md](ARCHITECTURE.md).
+```
+js/
+├── main.js              # Controller
+├── model/
+│   └── ShadowModel.js   # Estado e lógica de negócio
+├── view/
+│   └── ShadowView.js    # Manipulação do DOM
+├── components/          # Componentes auxiliares
+│   ├── LayerManager.js
+│   ├── BackgroundManager.js
+│   ├── GradientManager.js
+│   └── ...
+└── config/
+    └── controlsConfig.js
+```
 
-## Tecnologias
+Para detalhes técnicos completos, consulte [ARCHITECTURE.md](ARCHITECTURE.md).
 
-- **HTML5 Semantic**
-- **CSS3** (Variables, Grid, Flexbox, Animations)
-- **JavaScript** (ES6+, Modules, Classes)
+## 🚀 Como Usar
 
-## Licença
+### Online
+
+Acesse [gerador-de-box-shadow.netlify.app](https://gerador-de-box-shadow.netlify.app/)
+
+### Localmente
+
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/Franklyn-R-Silva/Gerador-de-box-shadow-com-JavaScript.git
+   ```
+
+2. Abra a pasta no VS Code
+
+3. Use a extensão **Live Server** para abrir o `index.html`
+
+> ⚠️ O projeto usa ES Modules, então precisa ser servido via HTTP (não funciona abrindo diretamente o arquivo).
+
+## 📝 Como Contribuir
+
+1. Fork o projeto
+2. Crie sua branch (`git checkout -b feature/NovaFuncionalidade`)
+3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
+4. Push para a branch (`git push origin feature/NovaFuncionalidade`)
+5. Abra um Pull Request
+
+## 👤 Autor
+
+**Franklyn R. Silva**
+
+- GitHub: [@Franklyn-R-Silva](https://github.com/Franklyn-R-Silva)
+- LinkedIn: [franklyn-roberto-dev](https://www.linkedin.com/in/franklyn-roberto-dev/)
+
+## 📄 Licença
 
 Este projeto está licenciado sob a [MIT License](LICENSE).
+
+---
+
+⭐ Se este projeto foi útil, considere dar uma estrela!
