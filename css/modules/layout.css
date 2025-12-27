@@ -18,7 +18,7 @@ header h1 {
   font-size: var(--font-h1);
   letter-spacing: -2px;
   color: var(--text-main);
-  text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: var(--spacing-2);
   line-height: var(--line-height-heading);
 }
@@ -40,13 +40,13 @@ header p {
 
 /* Helpers for inline style removal */
 .section-title-secondary {
-    font-size: 1.2rem;
-    margin: 1.5rem 0 1rem;
-    color: var(--text-muted);
+  font-size: 1.2rem;
+  margin: 1.5rem 0 1rem;
+  color: var(--text-muted);
 }
 
 .hidden-rule {
-    display: none;
+  display: none;
 }
 
 /* Grid Layout */
@@ -62,7 +62,7 @@ header p {
     grid-template-columns: 1fr;
     gap: var(--spacing-6);
   }
-  
+
   .main-wrapper {
     padding: var(--spacing-4);
     margin: var(--spacing-4) auto;
@@ -71,49 +71,55 @@ header p {
 
 /* Preview Box */
 #preview {
-    position: sticky;
-    top: var(--spacing-4);
-    display: flex;
-    flex-direction: column;
-    min-height: 520px; 
-    padding: var(--spacing-8);
-    justify-content: center; /* Center content vertically now */
-    align-items: center;     /* Center content horizontally */
-    background: var(--glass-bg); /* Ensure it has glass background */
-    border-radius: var(--radius-lg);
-    border: var(--glass-border);
-    box-shadow: var(--glass-shadow);
-    -webkit-backdrop-filter: var(--glass-blur);
-    backdrop-filter: var(--glass-blur);
+  position: sticky;
+  top: var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+  padding: var(--spacing-8);
+  justify-content: center; /* Center content vertically now */
+  align-items: center; /* Center content horizontally */
+  background: var(--glass-bg); /* Ensure it has glass background */
+  border-radius: var(--radius-lg);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
 }
 
 #preview h2 {
-    margin-bottom: var(--spacing-8); 
-    align-self: flex-start; 
-    width: 100%;
-    position: absolute; /* Float title */
-    top: var(--spacing-8);
-    left: var(--spacing-8);
+  margin-bottom: var(--spacing-8);
+  align-self: flex-start;
+  width: 100%;
+  position: absolute; /* Float title */
+  top: var(--spacing-8);
+  left: var(--spacing-8);
 }
 
 #box {
-    width: 200px;
-    height: 200px;
-    background: #ffd700;
-    border-radius: var(--radius-md);
-    margin: auto; /* Center the box in the remaining space */
-    align-self: center;
+  width: 200px;
+  height: 200px;
+  background: #ffd700;
+  border-radius: var(--radius-md);
+  margin: auto; /* Center the box in the remaining space */
+  align-self: center;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .blob { opacity: 0.4; } 
-    header h1 { font-size: 2.5rem; }
-    
-    .reference-input p { display: none; }
-    
-    #box {
-      width: 150px; 
-      height: 150px;
-    }
+  .blob {
+    opacity: 0.4;
+  }
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  .reference-input p {
+    display: none;
+  }
+
+  #box {
+    width: 150px;
+    height: 150px;
+  }
 }
