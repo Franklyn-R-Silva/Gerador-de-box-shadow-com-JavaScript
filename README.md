@@ -1,6 +1,8 @@
 # 🎨 Layered Shade - Box Shadow Generator
 
-Uma ferramenta web moderna e interativa para gerar sombras CSS (`box-shadow`) e código Dart/Flutter (`BoxShadow`) visualmente.
+A modern and interactive web tool for generating CSS shadows (`box-shadow`) and Dart/Flutter code (`BoxShadow`) visually.
+
+[🇧🇷 Português](docs/pt-BR/README.md)
 
 [![Demo](https://img.shields.io/badge/Demo-Live-brightgreen)](https://layeredshade.netlify.app/)
 [![CI](https://github.com/Franklyn-R-Silva/Layered-Shade/actions/workflows/ci.yml/badge.svg)](https://github.com/Franklyn-R-Silva/Layered-Shade/actions/workflows/ci.yml)
@@ -12,69 +14,69 @@ Uma ferramenta web moderna e interativa para gerar sombras CSS (`box-shadow`) e 
 [![Best Practices](https://img.shields.io/badge/Best%20Practices-100%25-success)](https://pagespeed.web.dev/analysis/https-layeredshade-netlify-app/1)
 [![SEO](https://img.shields.io/badge/SEO-100%25-success)](https://pagespeed.web.dev/analysis/https-layeredshade-netlify-app/1)
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Technologies
 
 ![Skills](https://go-skill-icons.vercel.app/api/icons?i=html,css,js&theme=dark&perline=3)
 
 ## 🚀 Demo
 
-[👉 Acesse a ferramenta online](https://layeredshade.netlify.app/)
+[👉 Try it online](https://layeredshade.netlify.app/)
 
 ![Preview](github/tela.png)
 
-## ✨ Funcionalidades
+## ✨ Features
 
-### Sombras
+### Shadows
 
-- **Visualização em Tempo Real**: Preview instantâneo das alterações
-- **Múltiplas Camadas**: Crie sombras complexas com várias camadas
-- **Controle Completo**: Ajuste X, Y, blur, spread, cor e opacidade
-- **Suporte a Inset**: Sombras internas com sugestão automática de pacote Flutter
+- **Real-time Preview**: Instant preview of changes
+- **Multiple Layers**: Create complex shadows with multiple layers
+- **Full Control**: Adjust X, Y, blur, spread, color and opacity
+- **Inset Support**: Inner shadows with automatic Flutter package suggestion
 
-### Fundo & Forma
+### Background & Shape
 
-- **Gradientes**: Linear e radial com múltiplos color stops
-- **Forma Personalizada**: Ajuste border-radius e padding
-- **Presets**: Templates prontos (Soft, Neumorphism, Glass)
+- **Gradients**: Linear and radial with multiple color stops
+- **Custom Shape**: Adjust border-radius and padding
+- **Presets**: Ready-made templates (Soft, Neumorphism, Glass)
 
-### Exportação
+### Export
 
-- **CSS**: Código pronto com prefixos (-webkit, -moz)
-- **Dart/Flutter**: BoxShadow e BoxDecoration formatados
-- **Tailwind**: Classes utilitárias arbitrárias
-- **Cópia Inteligente**: Botão sensível ao contexto (CSS/Dart/Tailwind)
+- **CSS**: Ready-to-use code with prefixes (-webkit, -moz)
+- **Dart/Flutter**: Formatted BoxShadow and BoxDecoration
+- **Tailwind**: Arbitrary utility classes
+- **Smart Copy**: Context-sensitive button (CSS/Dart/Tailwind)
 
-## 📊 Stack Técnica
+## 📊 Tech Stack
 
-| Tecnologia     | Uso                                                  |
+| Technology     | Usage                                                |
 | -------------- | ---------------------------------------------------- |
-| **HTML5**      | Estrutura semântica                                  |
+| **HTML5**      | Semantic structure                                   |
 | **CSS3**       | Variables, Grid, Flexbox, Animations, Glassmorphism  |
-| **JavaScript** | ES6+, Modules, Classes (Vanilla - zero dependências) |
+| **JavaScript** | ES6+, Modules, Classes (Vanilla - zero dependencies) |
 
-## ♿ Acessibilidade (A11y)
+## ♿ Accessibility (A11y)
 
-Este projeto foi desenvolvido com foco em acessibilidade:
+This project was developed with accessibility in mind:
 
-- **Skip Link**: Navegação rápida para usuários de teclado
-- **Landmarks Semânticos**: `main`, `header`, `footer`, `nav`, `aside`
-- **ARIA Roles**: Tabs com `role="tablist"` e `role="tabpanel"`
-- **Labels Descritivos**: Todos os botões e links com `aria-label`
-- **Focus Visible**: Indicadores de foco aprimorados
-- **Decorativos Ocultos**: `aria-hidden="true"` em elementos visuais
+- **Skip Link**: Quick navigation for keyboard users
+- **Semantic Landmarks**: `main`, `header`, `footer`, `nav`, `aside`
+- **ARIA Roles**: Tabs with `role="tablist"` and `role="tabpanel"`
+- **Descriptive Labels**: All buttons and links with `aria-label`
+- **Focus Visible**: Enhanced focus indicators
+- **Hidden Decoratives**: `aria-hidden="true"` on visual elements
 
-## 📁 Arquitetura
+## 📁 Architecture
 
-O projeto segue o padrão **MVC (Model-View-Controller)**:
+The project follows the **MVC (Model-View-Controller)** pattern:
 
 ```text
 js/
 ├── main.js              # Controller
 ├── model/
-│   └── ShadowModel.js   # Estado e lógica de negócio
+│   └── ShadowModel.js   # State and business logic
 ├── view/
-│   └── ShadowView.js    # Manipulação do DOM
-├── components/          # Componentes auxiliares
+│   └── ShadowView.js    # DOM manipulation
+├── components/          # Auxiliary components
 │   ├── LayerManager.js
 │   ├── BackgroundManager.js
 │   ├── GradientManager.js
@@ -83,47 +85,58 @@ js/
     └── controlsConfig.js
 ```
 
-Para detalhes técnicos completos, consulte [ARCHITECTURE.md](ARCHITECTURE.md).
+For complete technical details, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
-## 🚀 Como Usar
+## 🚀 Getting Started
 
 ### Online
 
-Acesse [layeredshade.netlify.app](https://layeredshade.netlify.app/)
+Visit [layeredshade.netlify.app](https://layeredshade.netlify.app/)
 
-### Localmente
+### Locally
 
-1. Clone o repositório:
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/Franklyn-R-Silva/Layered-Shade.git
    ```
 
-2. Abra a pasta no VS Code
+2. Open the folder in VS Code
 
-3. Use a extensão **Live Server** para abrir o `index.html`
+3. Use the **Live Server** extension to open `index.html`
 
-> ⚠️ O projeto usa ES Modules, então precisa ser servido via HTTP (não funciona abrindo diretamente o arquivo).
+> ⚠️ The project uses ES Modules, so it needs to be served via HTTP (won't work by opening the file directly).
 
-## 📝 Como Contribuir
+## 🧪 Testing
 
-1. Fork o projeto
-2. Crie sua branch (`git checkout -b feature/NovaFuncionalidade`)
-3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
-4. Push para a branch (`git push origin feature/NovaFuncionalidade`)
-5. Abra um Pull Request
+```bash
+npm install        # Install dependencies
+npm test           # Run tests
+npm run test:coverage  # Run with coverage
+npm run lint       # Check code style
+```
 
-## 👤 Autor
+## 📝 Contributing
+
+1. Fork the project
+2. Create your branch (`git checkout -b feature/NewFeature`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to the branch (`git push origin feature/NewFeature`)
+5. Open a Pull Request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
+## 👤 Author
 
 Franklyn R. Silva
 
 - GitHub: [@Franklyn-R-Silva](https://github.com/Franklyn-R-Silva)
 - LinkedIn: [franklyn-roberto-dev](https://www.linkedin.com/in/franklyn-roberto-dev/)
 
-## 📄 Licença
+## 📄 License
 
-Este projeto está licenciado sob a [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-⭐ Se este projeto foi útil, considere dar uma estrela!
+⭐ If this project was helpful, consider giving it a star!

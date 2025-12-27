@@ -1,48 +1,53 @@
 # Changelog
 
-Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
+All notable changes to this project will be documented in this file.
 
-O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
-e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+[🇧🇷 Português](docs/pt-BR/CHANGELOG.md)
 
 ## [1.1.0] - 2025-12-27
 
-### Adicionado
+### Added
 
-- ✅ **Testes Unitários**: 125 testes com Vitest cobrindo 100% do código
-- 📁 **Estrutura de Testes**: Pasta `tests/` organizada espelhando `js/`
-- 🔧 **GitHub Actions**: CI/CD para rodar testes automaticamente
-- 📝 **CONTRIBUTING.md**: Guia para contribuidores
-- ♿ **Acessibilidade**: Skip link, ARIA roles, landmarks semânticos
+- ✅ **Unit Tests**: 125 tests with Vitest covering 100% of the code
+- 📁 **Test Structure**: `tests/` folder organized mirroring `js/`
+- 🔧 **GitHub Actions**: CI/CD to run tests automatically
+- 📝 **CONTRIBUTING.md**: Contributor guide
+- ♿ **Accessibility**: Skip link, ARIA roles, semantic landmarks
+- 🔒 **SECURITY.md**: Security policy
+- 📜 **CODE_OF_CONDUCT.md**: Code of conduct
+- 🌐 **i18n**: Documentation in English and Portuguese
 
-### Modificado
+### Changed
 
-- 📖 **README.md**: Badges de Lighthouse, seção de acessibilidade
-- 🎨 **Footer**: Design atualizado com links sociais
-- 🐛 **Templates**: Correção dos presets Neumorph e Glass
+- 📖 **README.md**: Lighthouse badges, accessibility section
+- 🎨 **Footer**: Updated design with social links
+- 🐛 **Templates**: Fixed Neumorph and Glass presets
 
-### Corrigido
+### Fixed
 
-- 🔧 Métodos `addLayer`, `removeLayer`, `selectLayer` no ShadowModel
-- 🔧 Visibilidade dos tab panels (removido atributo `hidden` conflitante)
+- 🔧 `addLayer`, `removeLayer`, `selectLayer` methods in ShadowModel
+- 🔧 Tab panels visibility (removed conflicting `hidden` attribute)
 
 ---
 
 ## [1.0.0] - 2025-12-01
 
-### Adicionado
+### Initial Release
 
-- 🎨 **Gerador de Sombras**: Interface visual para criar box-shadows
-- 🔄 **Múltiplas Camadas**: Suporte a várias camadas de sombra
-- 🌈 **Gradientes**: Linear e radial com múltiplos color stops
-- 📋 **Exportação**: CSS, Dart/Flutter e Tailwind
-- 📱 **Responsivo**: Layout adaptável para mobile e desktop
-- 🎯 **Templates**: Presets Soft, Neumorphism e Glass
-- 🏗️ **Arquitetura MVC**: Código organizado e modular
+- 🎨 **Shadow Generator**: Visual interface for creating box-shadows
+- 🔄 **Multiple Layers**: Support for multiple shadow layers
+- 🌈 **Gradients**: Linear and radial with multiple color stops
+- 📋 **Export**: CSS, Dart/Flutter and Tailwind
+- 📱 **Responsive**: Adaptive layout for mobile and desktop
+- 🎯 **Templates**: Soft, Neumorphism and Glass presets
+- 🏗️ **MVC Architecture**: Organized and modular code
 
 ---
 
 ## Links
 
-- [Repositório](https://github.com/Franklyn-R-Silva/Layered-Shade)
+- [Repository](https://github.com/Franklyn-R-Silva/Layered-Shade)
 - [Demo](https://layeredshade.netlify.app/)

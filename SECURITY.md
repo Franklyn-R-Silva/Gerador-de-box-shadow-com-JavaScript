@@ -1,50 +1,52 @@
-# Política de Segurança
+# Security Policy
 
-## Versões Suportadas
+[🇧🇷 Português](docs/pt-BR/SECURITY.md)
 
-| Versão | Suportada          |
-| ------ | ------------------ |
-| 1.1.x  | ✅ Sim             |
-| 1.0.x  | ⚠️ Apenas críticos |
-| < 1.0  | ❌ Não             |
+## Supported Versions
 
-## Reportando uma Vulnerabilidade
+| Version | Supported        |
+| ------- | ---------------- |
+| 1.1.x   | ✅ Yes           |
+| 1.0.x   | ⚠️ Critical only |
+| < 1.0   | ❌ No            |
 
-Se você descobrir uma vulnerabilidade de segurança, por favor:
+## Reporting a Vulnerability
 
-1. **NÃO** abra uma issue pública
-2. Envie um email para: **franklyn.mobile.dev@gmail.com**
-3. Inclua:
-   - Descrição detalhada da vulnerabilidade
-   - Passos para reproduzir
-   - Possível impacto
-   - Sugestões de correção (se houver)
+If you discover a security vulnerability, please:
 
-### Tempo de Resposta
+1. **DO NOT** open a public issue
+2. Send an email to: `franklyn.mobile.dev@gmail.com`
+3. Include:
+   - Detailed description of the vulnerability
+   - Steps to reproduce
+   - Potential impact
+   - Suggested fixes (if any)
 
-- **Confirmação**: dentro de 48 horas
-- **Avaliação inicial**: dentro de 1 semana
-- **Resolução**: depende da severidade
+### Response Time
 
-### O que esperar
+- **Acknowledgment**: within 48 hours
+- **Initial assessment**: within 1 week
+- **Resolution**: depends on severity
 
-- Confirmaremos o recebimento do relatório
-- Investigaremos e manteremos você atualizado
-- Creditaremos você na correção (se desejar)
+### What to Expect
 
-## Escopo
+- We will confirm receipt of the report
+- We will investigate and keep you updated
+- We will credit you in the fix (if desired)
 
-Este projeto é uma ferramenta frontend estática sem backend. Vulnerabilidades relevantes incluem:
+## Scope
+
+This project is a static frontend tool with no backend. Relevant vulnerabilities include:
 
 - XSS (Cross-Site Scripting)
-- Injeção de código malicioso
-- Problemas com dependências (npm)
+- Malicious code injection
+- Dependency issues (npm)
 
-## Boas Práticas
+## Best Practices
 
-Este projeto segue boas práticas de segurança:
+This project follows security best practices:
 
-- ✅ Nenhum dado do usuário é coletado ou armazenado
-- ✅ Sem backend ou banco de dados
-- ✅ Dependências auditadas regularmente
-- ✅ Content Security Policy implementada
+- ✅ No user data is collected or stored
+- ✅ No backend or database
+- ✅ Dependencies audited regularly
+- ✅ Content Security Policy implemented

@@ -1,68 +1,74 @@
-# Arquitetura do Projeto "Layered Shade"
+# "Layered Shade" Project Architecture
 
-Este documento descreve a estrutura de arquivos e os padrões de design utilizados no projeto.
+This document describes the file structure and design patterns used in the project.
 
-## Padrão de Design
+[🇧🇷 Português](docs/pt-BR/ARCHITECTURE.md)
 
-O projeto utiliza uma arquitetura **MVC (Model-View-Controller)** adaptada para JavaScript Vanilla com ES Modules:
+## Design Pattern
 
-- **Model (`js/model/`)**: Define o estado da aplicação (propriedades da sombra) e a lógica de negócio (geração de código CSS e Dart).
-- **View (`js/view/`)**: Manipula o DOM, atualiza a interface visual e captura eventos do usuário. Delega tarefas específicas para componentes menores.
-- **Controller (`js/main.js`)**: O ponto de entrada. Instancia o Model e a View, e orquestra a comunicação entre eles.
+The project uses an **MVC (Model-View-Controller)** architecture adapted for Vanilla JavaScript with ES Modules:
 
-## Estrutura de Arquivos
+- **Model (`js/model/`)**: Defines the application state (shadow properties) and business logic (CSS and Dart code generation).
+- **View (`js/view/`)**: Manipulates the DOM, updates the visual interface and captures user events. Delegates specific tasks to smaller components.
+- **Controller (`js/main.js`)**: The entry point. Instantiates the Model and View, and orchestrates communication between them.
+
+## File Structure
 
 ### HTML (`index.html`)
 
-Estrutura semântica da página. Carrega o `js/main.js` como módulo (`type="module"`).
+Semantic page structure. Loads `js/main.js` as a module (`type="module"`).
 
 ### CSS (`css/`)
 
-O CSS foi modularizado para facilitar a manutenção e escalabilidade.
+CSS has been modularized for easier maintenance and scalability.
 
-- **`styles.css`**: Arquivo principal que importa todos os módulos.
-- **`variables.css`**: Define variáveis globais (Cores, Fontes, Espaçamentos) para o Design System.
+- **`styles.css`**: Main file that imports all modules.
+- **`variables.css`**: Defines global variables (Colors, Fonts, Spacing) for the Design System.
 - **`modules/`**:
-  - `base.css`: Reset e estilos globais (body, fontes).
-  - `layout.css`: Grid principal, cabeçalho e estrutura responsiva.
-  - `glassmorphism.css`: Efeitos de vidro (frosted glass), background e blobs animados.
-  - `controls.css`: Estilos gerais para os controles (sliders, containers).
-  - `inputs.css`: Estilização específica de inputs (range, color, text).
-  - `buttons.css`: Botões (reset, copiar).
-  - `tabs.css`: Sistema de abas (CSS vs Dart).
-  - `animations.css`: Keyframes para animações de fundo.
+  - `base.css`: Reset and global styles (body, fonts).
+  - `layout.css`: Main grid, header and responsive structure.
+  - `glassmorphism.css`: Glass effects (frosted glass), background and animated blobs.
+  - `controls.css`: General styles for controls (sliders, containers).
+  - `inputs.css`: Specific input styling (range, color, text).
+  - `buttons.css`: Buttons (reset, copy).
+  - `tabs.css`: Tab system (CSS vs Dart).
+  - `animations.css`: Keyframes for background animations.
 
 ### JavaScript (`js/`)
 
 #### 1. Controller
 
-- **`main.js`**: Inicializa a aplicação, ouve eventos da View (via `bindEvents`) e atualiza o Model e a View em resposta.
+- **`main.js`**: Initializes the application, listens for View events (via `bindEvents`) and updates Model and View in response.
 
 #### 2. Model
 
 - **`model/ShadowModel.js`**:
-  - `state`: Armazena horizontal, vertical, blur, spread, color, opacity, inset, borderRadius, padding.
-  - `getCSS()`: Retorna a string do `box-shadow`.
-  - `getDart()`: Retorna o código Flutter `BoxShadow` (incluindo suporte a `inset` e `BorderRadius`).
+  - `state`: Stores horizontal, vertical, blur, spread, color, opacity, inset, borderRadius, padding.
+  - `getCSS()`: Returns the `box-shadow` string.
+  - `getDart()`: Returns Flutter `BoxShadow` code (including `inset` and `BorderRadius` support).
 
 #### 3. View
 
 - **`view/ShadowView.js`**:
-  - Seleciona elementos do DOM.
-  - `updatePreview()`: Aplica os estilos na caixa de visualização.
-  - `updateInputs()`: Sincroniza os inputs com o estado atual.
-  - `bindEvents()`: Associa listeners aos inputs e botões.
-  - Delega funções para `TabManager` e `NotificationManager`.
+  - Selects DOM elements.
+  - `updatePreview()`: Applies styles to the preview box.
+  - `updateInputs()`: Syncs inputs with current state.
+  - `bindEvents()`: Associates listeners to inputs and buttons.
+  - Delegates functions to `TabManager` and `NotificationManager`.
 
-#### 4. Componentes (`js/components/`)
+#### 4. Components (`js/components/`)
 
-- **`TabManager.js`**: Gerencia a lógica de troca de abas (CSS/Dart) e visibilidade de conteúdo.
-- **`NotificationManager.js`**: Gerencia o feedback visual do botão de copiar.
+- **`TabManager.js`**: Manages tab switching logic (CSS/Dart) and content visibility.
+- **`NotificationManager.js`**: Manages copy button visual feedback.
+- **`LayerManager.js`**: Manages shadow layer list rendering.
+- **`BackgroundManager.js`**: Manages background gradient controls.
+- **`GradientManager.js`**: Manages gradient stop controls.
+- **`ControlFactory.js`**: Factory for creating UI controls.
 
-## Fluxo de Dados
+## Data Flow
 
-1. O usuário interage com um input (ex: slider de blur).
-2. `ShadowView` captura o evento e notifica o `ShadowController`.
-3. `ShadowController` chama `ShadowModel.update()` para alterar o estado.
-4. `ShadowController` solicita o novo estado e strings geradas ao Model.
-5. `ShadowController` chama `ShadowView.updatePreview()` e `updateInputs()` para refletir as mudanças na tela.
+1. User interacts with an input (e.g., blur slider).
+2. `ShadowView` captures the event and notifies `ShadowController`.
+3. `ShadowController` calls `ShadowModel.update()` to change state.
+4. `ShadowController` requests new state and generated strings from Model.
+5. `ShadowController` calls `ShadowView.updatePreview()` and `updateInputs()` to reflect changes on screen.

@@ -1,35 +1,37 @@
-## 📝 Descrição
+# Pull Request
 
-Descreva brevemente as mudanças feitas neste PR.
+## 📝 Description
 
-## 🔗 Issue Relacionada
+Briefly describe the changes made in this PR.
 
-Fixes #(número da issue)
+## 🔗 Related Issue
 
-## 🧪 Tipo de Mudança
+Fixes #(issue number)
 
-- [ ] 🐛 Bug fix (mudança que corrige um problema)
-- [ ] ✨ Nova feature (mudança que adiciona funcionalidade)
-- [ ] 💥 Breaking change (correção ou feature que pode quebrar funcionalidade existente)
-- [ ] 📝 Documentação (mudanças apenas em documentação)
-- [ ] 🎨 Estilo (formatação, sem mudança de lógica)
-- [ ] ♻️ Refatoração (mudança que não adiciona feature nem corrige bug)
-- [ ] ✅ Testes (adição ou correção de testes)
+## 🧪 Type of Change
+
+- [ ] 🐛 Bug fix (change that fixes an issue)
+- [ ] ✨ New feature (change that adds functionality)
+- [ ] 💥 Breaking change (fix or feature that could break existing functionality)
+- [ ] 📝 Documentation (documentation-only changes)
+- [ ] 🎨 Style (formatting, no logic change)
+- [ ] ♻️ Refactoring (change that neither adds feature nor fixes bug)
+- [ ] ✅ Tests (adding or fixing tests)
 
 ## ✅ Checklist
 
-- [ ] Meu código segue o estilo do projeto
-- [ ] Revisei meu próprio código
-- [ ] Adicionei comentários onde necessário
-- [ ] Atualizei a documentação (se aplicável)
-- [ ] Adicionei testes que provam que minha correção/feature funciona
-- [ ] Testes novos e existentes passam localmente (`npm test`)
-- [ ] ESLint não reporta novos warnings (`npm run lint`)
+- [ ] My code follows the project's style
+- [ ] I have reviewed my own code
+- [ ] I have added comments where necessary
+- [ ] I have updated documentation (if applicable)
+- [ ] I have added tests that prove my fix/feature works
+- [ ] New and existing tests pass locally (`npm test`)
+- [ ] ESLint reports no new warnings (`npm run lint`)
 
-## 📸 Screenshots (se aplicável)
+## 📸 Screenshots (if applicable)
 
-Adicione screenshots mostrando as mudanças visuais.
+Add screenshots showing visual changes.
 
-## 📋 Notas Adicionais
+## 📋 Additional Notes
 
-Qualquer informação adicional para os revisores.
+Any additional information for reviewers.

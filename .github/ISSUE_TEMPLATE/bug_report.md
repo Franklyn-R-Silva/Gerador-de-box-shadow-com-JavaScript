@@ -1,40 +1,40 @@
 ---
 name: 🐛 Bug Report
-about: Reportar um problema ou comportamento inesperado
+about: Report a problem or unexpected behavior
 title: '[BUG] '
 labels: bug
 assignees: ''
 ---
 
-## 📝 Descrição do Bug
+## 📝 Bug Description
 
-Uma descrição clara e concisa do bug.
+A clear and concise description of the bug.
 
-## 🔄 Passos para Reproduzir
+## 🔄 Steps to Reproduce
 
-1. Vá para '...'
-2. Clique em '...'
-3. Role até '...'
-4. Veja o erro
+1. Go to '...'
+2. Click on '...'
+3. Scroll to '...'
+4. See error
 
-## ✅ Comportamento Esperado
+## ✅ Expected Behavior
 
-O que você esperava que acontecesse.
+What you expected to happen.
 
-## ❌ Comportamento Atual
+## ❌ Actual Behavior
 
-O que realmente aconteceu.
+What actually happened.
 
 ## 📸 Screenshots
 
-Se aplicável, adicione screenshots para ajudar a explicar o problema.
+If applicable, add screenshots to help explain the problem.
 
-## 🌐 Ambiente
+## 🌐 Environment
 
-- **Navegador**: [ex: Chrome 120, Firefox 121]
-- **Sistema Operacional**: [ex: Windows 11, macOS 14]
-- **Dispositivo**: [ex: Desktop, Mobile]
+- **Browser**: [e.g. Chrome 120, Firefox 121]
+- **Operating System**: [e.g. Windows 11, macOS 14]
+- **Device**: [e.g. Desktop, Mobile]
 
-## 📋 Informações Adicionais
+## 📋 Additional Information
 
-Qualquer outro contexto sobre o problema.
+Any other context about the problem.

@@ -1,28 +1,28 @@
 ---
 name: ✨ Feature Request
-about: Sugerir uma nova funcionalidade
+about: Suggest a new feature
 title: '[FEATURE] '
 labels: enhancement
 assignees: ''
 ---
 
-## 🎯 Problema Relacionado
+## 🎯 Related Problem
 
-Descreva o problema que essa feature resolveria.
-Ex: "Eu fico frustrado quando [...]"
+Describe the problem this feature would solve.
+E.g., "I'm frustrated when [...]"
 
-## 💡 Solução Proposta
+## 💡 Proposed Solution
 
-Uma descrição clara do que você gostaria que acontecesse.
+A clear description of what you'd like to happen.
 
-## 🔄 Alternativas Consideradas
+## 🔄 Alternatives Considered
 
-Descreva outras soluções que você considerou.
+Describe other solutions you've considered.
 
-## 📸 Mockups / Exemplos
+## 📸 Mockups / Examples
 
-Se aplicável, adicione imagens ou links de referência.
+If applicable, add images or reference links.
 
-## 📋 Contexto Adicional
+## 📋 Additional Context
 
-Qualquer outro contexto ou screenshots sobre a feature.
+Any other context or screenshots about the feature.

@@ -1,33 +1,35 @@
-# Código de Conduta
+# Code of Conduct
 
-## Nosso Compromisso
+[🇧🇷 Português](docs/pt-BR/CODE_OF_CONDUCT.md)
 
-Nós, como membros, contribuidores e líderes, nos comprometemos a fazer da participação em nossa comunidade uma experiência livre de assédio para todos.
+## Our Pledge
 
-## Nossos Padrões
+We as members, contributors, and leaders pledge to make participation in our community a harassment-free experience for everyone.
 
-### ✅ Comportamentos Positivos
+## Our Standards
 
-- Demonstrar empatia e gentileza
-- Respeitar opiniões e experiências diferentes
-- Dar e aceitar feedback construtivo
-- Assumir responsabilidade por erros e aprender com eles
-- Focar no que é melhor para a comunidade
+### ✅ Positive Behaviors
 
-### ❌ Comportamentos Inaceitáveis
+- Demonstrating empathy and kindness
+- Respecting differing opinions and experiences
+- Giving and accepting constructive feedback
+- Taking responsibility for mistakes and learning from them
+- Focusing on what is best for the community
 
-- Linguagem ou imagens sexualizadas
-- Trolling, insultos ou ataques pessoais
-- Assédio público ou privado
-- Publicar informações privadas de outros
-- Conduta inapropriada em contexto profissional
+### ❌ Unacceptable Behaviors
 
-## Aplicação
+- Sexualized language or imagery
+- Trolling, insults, or personal attacks
+- Public or private harassment
+- Publishing others' private information
+- Inappropriate conduct in a professional context
 
-Instâncias de comportamento abusivo podem ser reportadas para **franklyn.mobile.dev@gmail.com**.
+## Enforcement
 
-Todas as reclamações serão revisadas e investigadas de forma justa.
+Instances of abusive behavior may be reported to `franklyn.mobile.dev@gmail.com`.
 
-## Atribuição
+All complaints will be reviewed and investigated fairly.
 
-Este Código de Conduta é adaptado do [Contributor Covenant](https://www.contributor-covenant.org/), versão 2.1.
+## Attribution
+
+This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org/), version 2.1.

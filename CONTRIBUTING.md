@@ -1,116 +1,118 @@
-# Guia de Contribuição
+# Contributing Guide
 
-Obrigado por considerar contribuir com o **Layered Shade**! 🎉
+Thank you for considering contributing to **Layered Shade**! 🎉
 
-## 📋 Como Contribuir
+[🇧🇷 Português](docs/pt-BR/CONTRIBUTING.md)
 
-### 1. Fork e Clone
+## 📋 How to Contribute
+
+### 1. Fork and Clone
 
 ```bash
-# Fork o projeto no GitHub, depois:
-git clone https://github.com/SEU-USUARIO/Layered-Shade.git
+# Fork the project on GitHub, then:
+git clone https://github.com/YOUR-USERNAME/Layered-Shade.git
 cd Layered-Shade
 ```
 
-### 2. Instale as Dependências
+### 2. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Crie uma Branch
+### 3. Create a Branch
 
 ```bash
-git checkout -b feature/minha-nova-funcionalidade
+git checkout -b feature/my-new-feature
 ```
 
-### 4. Faça suas Alterações
+### 4. Make Your Changes
 
-- Siga o padrão de código existente
-- Adicione testes para novas funcionalidades
-- Verifique se todos os testes passam: `npm test`
+- Follow the existing code style
+- Add tests for new features
+- Ensure all tests pass: `npm test`
 
-### 5. Commit e Push
+### 5. Commit and Push
 
 ```bash
 git add .
-git commit -m "feat: adiciona nova funcionalidade X"
-git push origin feature/minha-nova-funcionalidade
+git commit -m "feat: add new feature X"
+git push origin feature/my-new-feature
 ```
 
-### 6. Abra um Pull Request
+### 6. Open a Pull Request
 
-Vá até o repositório original e abra um PR descrevendo suas alterações.
+Go to the original repository and open a PR describing your changes.
 
 ---
 
-## 📏 Padrões de Código
+## 📏 Code Standards
 
 ### JavaScript
 
 - ES6+ (modules, arrow functions, destructuring)
-- Nomes de variáveis em `camelCase`
-- Classes em `PascalCase`
-- Comentários JSDoc para funções públicas
+- Variable names in `camelCase`
+- Classes in `PascalCase`
+- JSDoc comments for public functions
 
 ### CSS
 
-- CSS Variables para cores e espaçamentos
-- BEM-like naming (quando aplicável)
+- CSS Variables for colors and spacing
+- BEM-like naming (when applicable)
 - Mobile-first approach
 
 ### Commits
 
-Seguimos o padrão [Conventional Commits](https://www.conventionalcommits.org/):
+We follow [Conventional Commits](https://www.conventionalcommits.org/):
 
-| Tipo        | Descrição                      |
-| ----------- | ------------------------------ |
-| `feat:`     | Nova funcionalidade            |
-| `fix:`      | Correção de bug                |
-| `docs:`     | Documentação                   |
-| `style:`    | Formatação (não altera lógica) |
-| `refactor:` | Refatoração de código          |
-| `test:`     | Adição/correção de testes      |
-| `chore:`    | Tarefas de manutenção          |
+| Type        | Description                  |
+| ----------- | ---------------------------- |
+| `feat:`     | New feature                  |
+| `fix:`      | Bug fix                      |
+| `docs:`     | Documentation                |
+| `style:`    | Formatting (no logic change) |
+| `refactor:` | Code refactoring             |
+| `test:`     | Adding/fixing tests          |
+| `chore:`    | Maintenance tasks            |
 
 ---
 
-## 🧪 Rodando os Testes
+## 🧪 Running Tests
 
 ```bash
-# Rodar testes
+# Run tests
 npm test
 
-# Rodar com watch mode
+# Run in watch mode
 npm run test:watch
 
-# Rodar com cobertura
+# Run with coverage
 npm run test:coverage
 ```
 
 ---
 
-## 🐛 Reportando Bugs
+## 🐛 Reporting Bugs
 
-1. Verifique se o bug já foi reportado nas [Issues](https://github.com/Franklyn-R-Silva/Layered-Shade/issues)
-2. Se não, abra uma nova issue com:
-   - Descrição clara do problema
-   - Passos para reproduzir
-   - Comportamento esperado vs atual
-   - Screenshots (se aplicável)
-
----
-
-## 💡 Sugerindo Funcionalidades
-
-Abra uma [Issue](https://github.com/Franklyn-R-Silva/Layered-Shade/issues) com a tag `enhancement` descrevendo:
-
-- O problema que a funcionalidade resolve
-- Como você imagina que funcionaria
-- Alternativas consideradas
+1. Check if the bug has already been reported in [Issues](https://github.com/Franklyn-R-Silva/Layered-Shade/issues)
+2. If not, open a new issue with:
+   - Clear description of the problem
+   - Steps to reproduce
+   - Expected vs actual behavior
+   - Screenshots (if applicable)
 
 ---
 
-## 📄 Licença
+## 💡 Suggesting Features
 
-Ao contribuir, você concorda que suas contribuições serão licenciadas sob a [MIT License](LICENSE).
+Open an [Issue](https://github.com/Franklyn-R-Silva/Layered-Shade/issues) with the `enhancement` label describing:
+
+- The problem the feature solves
+- How you imagine it would work
+- Alternatives considered
+
+---
+
+## 📄 License
+
+By contributing, you agree that your contributions will be licensed under the [MIT License](LICENSE).
