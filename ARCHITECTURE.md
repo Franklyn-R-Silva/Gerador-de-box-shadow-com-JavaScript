@@ -1,4 +1,4 @@
-# Arquitetura do Projeto "Box Shadow Generator"
+# Arquitetura do Projeto "Layered Shade"
 
 Este documento descreve a estrutura de arquivos e os padrões de design utilizados no projeto.
 
@@ -61,8 +61,8 @@ O CSS foi modularizado para facilitar a manutenção e escalabilidade.
 
 ## Fluxo de Dados
 
-1.  O usuário interage com um input (ex: slider de blur).
-2.  `ShadowView` captura o evento e notifica o `ShadowController`.
-3.  `ShadowController` chama `ShadowModel.update()` para alterar o estado.
-4.  `ShadowController` solicita o novo estado e strings geradas ao Model.
-5.  `ShadowController` chama `ShadowView.updatePreview()` e `updateInputs()` para refletir as mudanças na tela.
+1. O usuário interage com um input (ex: slider de blur).
+2. `ShadowView` captura o evento e notifica o `ShadowController`.
+3. `ShadowController` chama `ShadowModel.update()` para alterar o estado.
+4. `ShadowController` solicita o novo estado e strings geradas ao Model.
+5. `ShadowController` chama `ShadowView.updatePreview()` e `updateInputs()` para refletir as mudanças na tela.

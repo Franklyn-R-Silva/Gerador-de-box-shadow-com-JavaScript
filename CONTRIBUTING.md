@@ -8,8 +8,8 @@ Obrigado por considerar contribuir com o **Layered Shade**! 🎉
 
 ```bash
 # Fork o projeto no GitHub, depois:
-git clone https://github.com/SEU-USUARIO/Gerador-de-box-shadow-com-JavaScript.git
-cd Gerador-de-box-shadow-com-JavaScript
+git clone https://github.com/SEU-USUARIO/Layered-Shade.git
+cd Layered-Shade
 ```
 
 ### 2. Instale as Dependências
