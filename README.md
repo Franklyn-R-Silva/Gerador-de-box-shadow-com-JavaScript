@@ -4,6 +4,10 @@ Uma ferramenta web moderna e interativa para gerar sombras CSS (`box-shadow`) e 
 
 [![Demo](https://img.shields.io/badge/Demo-Live-brightgreen)](https://gerador-de-box-shadow.netlify.app/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Performance](https://img.shields.io/badge/Performance-98%25-success)](https://pagespeed.web.dev/analysis/https-gerador-de-box-shadow-netlify-app/1)
+[![Accessibility](https://img.shields.io/badge/Accessibility-95%25-success)](https://pagespeed.web.dev/analysis/https-gerador-de-box-shadow-netlify-app/1)
+[![Best Practices](https://img.shields.io/badge/Best%20Practices-100%25-success)](https://pagespeed.web.dev/analysis/https-gerador-de-box-shadow-netlify-app/1)
+[![SEO](https://img.shields.io/badge/SEO-100%25-success)](https://pagespeed.web.dev/analysis/https-gerador-de-box-shadow-netlify-app/1)
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -37,13 +41,24 @@ Uma ferramenta web moderna e interativa para gerar sombras CSS (`box-shadow`) e 
 - **Tailwind**: Classes utilitárias arbitrárias
 - **Cópia Inteligente**: Botão sensível ao contexto (CSS/Dart/Tailwind)
 
-## � Stack Técnica
+## 📊 Stack Técnica
 
 | Tecnologia     | Uso                                                  |
 | -------------- | ---------------------------------------------------- |
 | **HTML5**      | Estrutura semântica                                  |
 | **CSS3**       | Variables, Grid, Flexbox, Animations, Glassmorphism  |
 | **JavaScript** | ES6+, Modules, Classes (Vanilla - zero dependências) |
+
+## ♿ Acessibilidade (A11y)
+
+Este projeto foi desenvolvido com foco em acessibilidade:
+
+- **Skip Link**: Navegação rápida para usuários de teclado
+- **Landmarks Semânticos**: `main`, `header`, `footer`, `nav`, `aside`
+- **ARIA Roles**: Tabs com `role="tablist"` e `role="tabpanel"`
+- **Labels Descritivos**: Todos os botões e links com `aria-label`
+- **Focus Visible**: Indicadores de foco aprimorados
+- **Decorativos Ocultos**: `aria-hidden="true"` em elementos visuais
 
 ## 📁 Arquitetura
 
