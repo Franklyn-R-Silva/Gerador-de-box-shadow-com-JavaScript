@@ -325,6 +325,32 @@ describe('ShadowModel', () => {
       const bgCSS = model.getBackgroundCSS();
       expect(bgCSS).toContain('#ffdd00');
     });
+
+    it('should generate radial gradient with custom size', () => {
+      model.addBackgroundLayer('radial');
+      model.backgroundLayers[0].size = 'closest-side';
+      const bgCSS = model.getBackgroundCSS();
+      expect(bgCSS).toContain('radial-gradient');
+      expect(bgCSS).toContain('closest-side');
+    });
+
+    it('should generate radial gradient with custom position', () => {
+      model.addBackgroundLayer('radial');
+      model.backgroundLayers[0].posX = 25;
+      model.backgroundLayers[0].posY = 75;
+      const bgCSS = model.getBackgroundCSS();
+      expect(bgCSS).toContain('25%');
+      expect(bgCSS).toContain('75%');
+    });
+
+    it('should combine multiple gradient layers', () => {
+      model.addBackgroundLayer('linear');
+      model.addBackgroundLayer('radial');
+      const bgCSS = model.getBackgroundCSS();
+      expect(bgCSS).toContain('linear-gradient');
+      expect(bgCSS).toContain('radial-gradient');
+      expect(bgCSS).toContain('#ffdd00');
+    });
   });
 
   // ============================================
@@ -355,6 +381,36 @@ describe('ShadowModel', () => {
       model.addLayer();
       const dart = model.getDart();
       expect(dart.match(/BoxShadow\(/g)).toHaveLength(2);
+    });
+
+    it('should include gradient when background layers exist', () => {
+      model.update('borderRadius', 10);
+      model.addBackgroundLayer('linear');
+      const dart = model.getDart();
+      expect(dart).toContain('gradient:');
+      expect(dart).toContain('LinearGradient');
+      expect(dart).toContain('BoxDecoration');
+    });
+
+    it('should include radial gradient in Dart', () => {
+      model.update('borderRadius', 5);
+      model.addBackgroundLayer('radial');
+      const dart = model.getDart();
+      expect(dart).toContain('RadialGradient');
+    });
+
+    it('should output BoxDecoration with boxShadow array', () => {
+      model.update('borderRadius', 0);
+      model.backgroundLayers = [];
+      const dart = model.getDart();
+      expect(dart).toContain('boxShadow: [');
+      expect(dart).toContain('BoxDecoration');
+    });
+
+    it('should output solid color in Dart when no gradient layers', () => {
+      model.update('borderRadius', 10);
+      const dart = model.getDart();
+      expect(dart).toContain('color: Color(0xFFFFDD00)');
     });
   });
 
